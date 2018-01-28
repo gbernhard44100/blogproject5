@@ -1,0 +1,25 @@
+{% macro createView(form,submitValue) %}    
+<section>
+    <form action="{{form.targetUrl}}" method="{{form.method}}">
+        {% for field in form.fields %}
+            {% if field.fieldType == 'Input' %}
+                <div>
+                    {%if field.errorMessage%} <p>{{field.errorMessage}}</p>{% endif %}
+                    <label for="{{field.name}}">{{field.label}}</label></br>
+                    <Input type="{{field.type}}" id="{{field.name}}" name="{{field.name}}" value="{{field.value}}">
+                </div>
+            {% else %}
+                <div>
+                    {%if field.errorMessage%} <p>{{field.errorMessage}}</p>{% endif %}
+                    <label for="{{field.name}}">{{field.label}}</label></br>
+                    <textarea id="{{field.name}}" name="{{field.name}}" rows="{{field.rows}}" cols="{{field.cols}}">{{field.value}}</textarea>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div>
+            <input type="submit" value="{{submitValue}}"> 
+        </div>
+    </form>
+</section>
+{% endmacro %}       
+        

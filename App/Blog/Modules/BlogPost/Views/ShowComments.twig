@@ -1,0 +1,35 @@
+{% extends "Layout.twig" %}
+
+{% block title %}
+    <title>Page Admin - Commentaires</title>
+{% endblock %}
+
+
+{% block content %}
+    <H1>Page Admin - Commentaires du Blogpost : {{blogpost.title}}</H1>    
+    
+    <article>
+        <H1>{{blogPost.title}}</H1>
+        <H4>Par {{blogPost.author}}, le {{blogPost.updateDate}}</H4>
+        <p><strong>{{blogPost.content|slice(0,200)}}</strong>{{blogPost.content|truncate(200)}}</p>
+    </article>    
+    
+    <table>
+            <thead>
+                <th>Date</th>
+                <th>Auteur</th>
+                <th>Message</th>  
+            </thead>                
+            <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td>Le {{comment.updateDate}}</td>
+                        <td>{{comment.author}}</td>
+                        <td>{{comment.content}}</td>
+                        <td>{% if comment.valid == false %}<a href="/admin/blogpost/{{blogPost.id}}/commentaire/{{comment.id}}/valider">Valider</a>{% endif %}</td>
+                        <td><a href="/admin/blogpost/{{blogPost.id}}/commentaire/{{comment.id}}/supprimer">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>    
+    </table>
+{% endblock %}

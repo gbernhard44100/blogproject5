@@ -1,0 +1,18 @@
+{% extends "Layout.twig" %}
+
+{% block title %}
+    <title>Mes BlogPosts</title>
+{% endblock %}
+
+
+{% block content %}
+    <P>Ci-dessous : la liste des articles</p>
+    
+    {% for blogpost in blogPosts %}
+        <div>
+            <H1>{{blogpost.title}}</H1>
+            <H4>Par {{blogpost.author}}, le {{blogpost.updateDate}}</H4>
+            <p>{{blogpost.content | slice(0, 200)}}</p><a href="/blogpost/{{blogpost.id}}">lire la suite...</a>
+        </div>
+    {% endfor %}
+{% endblock %}

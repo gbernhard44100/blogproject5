@@ -1,0 +1,23 @@
+{% extends "Layout.twig" %}
+{% import "form.twig" as formular %}
+
+{% block title %}
+    <title>BlogPost : {{blogPost.title}}</title>
+{% endblock %}
+
+{% block content %}
+    <article>
+        <H1>{{blogPost.title}}</H1>
+        <H4>Par {{blogPost.author}}, le {{blogPost.updateDate}}</H4>
+        <p><strong>{{blogPost.content|slice(0,200)}}</strong>{{blogPost.content|truncate(200)}}</p>
+    </article>
+    {{ formular.createView(commentForm,'Poster le commentaire')}}
+    <section>
+    {% for comment in comments %}
+        {% if comment.valid == true %}
+            <H4>{{comment.author}}, le {{comment.updateDate}}</H4>
+            <p>{{comment.content}}</p>
+        {% endif %}
+    {% endfor %}
+    </section>
+{% endblock %}

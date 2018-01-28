@@ -1,0 +1,34 @@
+{% extends "Layout.twig" %}
+
+{% block title %}
+    <title>Page Admin</title>
+{% endblock %}
+
+
+{% block content %}
+    <H1>Page Admin</H1>
+    
+    <p>Pour ajourter un article :  <a href="/admin/pageajoutblogPost">cliquer ici</a></p>
+    
+    <table>
+            <thead>
+                <th>Date</th>
+                <th>Auteur</th>
+                <th>Titre</th>
+                <th>Début du texte de l'article</th>    
+            </thead>                
+            <tbody>
+                {% for blogpost in blogPosts %}
+                    <tr>
+                        <td>Le {{blogpost.updateDate}}</td>
+                        <td>{{blogpost.author}}</td>
+                        <td>{{blogpost.title}}</td>
+                        <td>{{blogpost.content | slice(0, 200)}}</td>
+                        <td><a href="/admin/blogpost/{{blogpost.id}}/modifier">Modifier</a></td>
+                        <td><a href="/admin/blogpost/{{blogpost.id}}/supprimer">Supprimer</a></td>
+                        <td><a href="/admin/blogpost/{{blogpost.id}}/commentaires">Commentaires</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>    
+    </table>
+{% endblock %}

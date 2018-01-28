@@ -1,0 +1,10 @@
+{% extends "Layout.twig" %}
+{% import "form.twig" as formular %}
+
+{% block title %}
+    <title>Nouveau BlogPost</title>
+{% endblock %}
+
+{% block content %}
+    {{ formular.createView(form,'Modifier le BlogPost')}}
+{% endblock %}
