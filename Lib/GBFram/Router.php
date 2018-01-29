@@ -1,12 +1,34 @@
 <?php
 namespace Lib\GBFram;
  
-class Router
+class Router 
 {
   protected $routes = [];
  
   const NO_ROUTE = 1;
  
+  function __construct($routesFilePath) {
+    $xml = new \DOMDocument;
+    $xml->load($routesFilePath);
+ 
+    $routes = $xml->getElementsByTagName('route');
+ 
+    // On parcourt les routes du fichier XML.
+    foreach ($routes as $route)
+    {
+      $vars = [];
+ 
+      // On regarde si des variables sont présentes dans l'URL.
+      if ($route->hasAttribute('vars'))
+      {
+        $vars = explode(',', $route->getAttribute('vars'));
+      }
+ 
+      // On ajoute la route au routeur.
+      $this->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $vars));
+    }
+  }
+  
   public function addRoute(Route $route)
   {
     if (!in_array($route, $this->routes))
@@ -42,7 +64,6 @@ class Router
           // On assigne ce tableau de variables � la route
           $route->setVars($listVars);
         }
- 
         return $route;
       }
     }
