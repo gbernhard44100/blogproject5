@@ -24,6 +24,13 @@
 
         </head>
         <body>
+            <header>
+                {% if session.auth is defined %}
+                    <a href="/sedeconnecter" ><input type="button" value="Se déconnecter" /></a>
+                {% else %}
+                    <a href="/demandeconnexion" ><input type="button" value="Se connecter" /></a>
+                {% endif %}    
+            <header>    
             <nav>
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/mesblogposts">Les articles</a></li>

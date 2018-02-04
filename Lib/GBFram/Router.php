@@ -1,13 +1,14 @@
 <?php
 namespace Lib\GBFram;
  
-class Router 
+class Router extends ApplicationComponent
 {
   protected $routes = [];
  
   const NO_ROUTE = 1;
  
-  function __construct($routesFilePath) {
+  function __construct(Application $app,string $routesFilePath) {
+    parent::__construct($app);
     $xml = new \DOMDocument;
     $xml->load($routesFilePath);
  
@@ -36,7 +37,14 @@ class Router
       $this->routes[] = $route;
     }
   }
- 
+
+  public function getController($url)
+  {
+    $route = $this->getRoute($url);
+    $controllerClass = 'App\\'.$this->app->name().'\\Modules\\'.$route->module().'\\'.$route->module().'Controller';
+    return new $controllerClass($this->app, $route->module(), $route->action());
+  }
+
   public function getRoute($url)
   {
     foreach ($this->routes as $route)

@@ -5,8 +5,8 @@ abstract class Application
 {
   protected $httpRequest;
   protected $httpResponse;
+  protected $router;
   protected $name;
-  protected $user;
   protected $config;
  
   public function __construct($name)
@@ -14,19 +14,16 @@ abstract class Application
     $this->name = $name;
     $this->httpRequest = new HTTPRequest($this);
     $this->httpResponse = new HTTPResponse($this);
-    $this->user = new User($this);
+    $this->router = new Router($this,'App/'.$this->name.'/Config/routes.xml');
     $this->config = new Config($this); 
   }
  
-  public function getController()
-  {
-    $controllerClass = 'App\\'.$this->name.'\\Modules\\'.$this->httpRequest->route()->module().'\\'.$this->httpRequest->route()->module().'Controller';
-    return new $controllerClass($this, $this->httpRequest->route()->module(), $this->httpRequest->route()->action());
-  }
- 
-  public function run(){
-    if($this->httpRequest->route()){
-        $controller = $this->getController();       
+  public function run(){    
+    session_start();
+    $this->httpRequest->setRoute($this->router->getRoute($this->httpRequest->requestURI()));
+    
+    if($this->httpRequest->route()){       
+        $controller = $this->router->getController($this->httpRequest->requestURI());
         $controller->execute(); 
         $this->httpResponse->setPage($controller->page());        
     }
@@ -54,10 +51,5 @@ abstract class Application
   public function config()
   {
     return $this->config;
-  }
- 
-  public function user()
-  {
-    return $this->user;
   }
 }
