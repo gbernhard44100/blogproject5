@@ -1,0 +1,10 @@
+{% extends "Layout.twig" %}
+{% import "form.twig" as formular %}
+
+{% block title %}
+    <title>S'inscrire</title>
+{% endblock %}
+
+{% block content %}
+    {{ formular.createView(form,'S\'inscrire') | raw }}
+{% endblock %}

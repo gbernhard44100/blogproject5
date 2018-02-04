@@ -1,0 +1,30 @@
+{% extends "Layout.twig" %}
+
+{% block title %}
+    <title>Page Admin - Liste des inscriptions</title>
+{% endblock %}
+
+
+{% block content %}
+    <H1>Page Admin - Liste des inscriptions : </H1>    
+    
+    
+    
+    <table>
+            <thead>
+                <th>Utilisateur</th>
+                <th>Statut</th> 
+            </thead>                
+            <tbody>
+                {% for subscription in subscriptions %}
+                    <tr>
+                        <td>{{subscription.username}}</td>
+                        <td>{% if subscription.valid == false %}<a href="/admin/inscription/{{subscription.id}}/valider">A valider</a>
+                            {% else %}Validé 
+                            {% endif %}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>    
+    </table>
+{% endblock %}

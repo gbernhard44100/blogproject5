@@ -6,7 +6,6 @@ use Twig\Loader\FilesystemLoader;
 
 class Page extends ApplicationComponent
 {
-  protected $module;
   protected $contentFile;
   protected $vars = [];
   protected $twig;
@@ -27,6 +26,7 @@ class Page extends ApplicationComponent
     ));
     $this->twig->addExtension(new \Twig_Extensions_Extension_Text);
     $this->twig->addExtension(new \Twig_Extension_Debug());
+    $this->twig->addGlobal('session', $_SESSION);
   }
 
 

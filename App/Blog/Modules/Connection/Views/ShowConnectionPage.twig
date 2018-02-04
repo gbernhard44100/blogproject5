@@ -1,0 +1,12 @@
+{% extends "Layout.twig" %}
+{% import "form.twig" as formular %}
+
+{% block title %}
+    <title>Connexion Admin</title>
+{% endblock %}
+
+{% block content %}
+    {{ formular.createView(form,'Se connecter')}}
+    
+    <p>Pas encore inscrit? Vous pouvez vous inscrire en cliquant : <a href="/demandeinscription">ici</a>
+{% endblock %}

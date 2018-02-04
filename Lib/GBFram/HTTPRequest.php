@@ -3,31 +3,15 @@ namespace Lib\GBFram;
  
 class HTTPRequest extends ApplicationComponent
 {
-  protected $route;
-    
-  function __construct(Application $app){
-    parent::__construct($app);
-    $router = new Router('App/'.$app->name().'/Config/routes.xml');
-    try
-    {
-      // On récupère la route correspondante à l'URL.
-        $this->route = $router->getRoute($this->requestURI());
-    }
-    catch (\RuntimeException $e)
-    {
-      if ($e->getCode() == Router::NO_ROUTE)
-      {
-        // Si aucune route ne correspond, c'est que la page demandée n'existe pas.
-        $this->route = null;
-      }
-    }
- 
-    // On ajoute les variables de l'URL au tableau $_GET.
-    $_GET = array_merge($_GET, $this->route->vars());
-  }
+  protected $route;    
   
   public function route(){
       return $this->route;
+  }
+  
+  public function setRoute($route){
+      $this->route = $route;
+      $_GET = array_merge($_GET, $this->route->vars());
   }
   
   public function cookieData($key)
