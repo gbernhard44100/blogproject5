@@ -1,25 +1,39 @@
 {% macro createView(form,submitValue) %}    
-<section>
+<div class="form form-row">
     <form action="{{form.targetUrl}}" method="{{form.method}}">
-        {% for field in form.fields %}
-            {% if field.fieldType == 'Input' %}
-                <div>
-                    {%if field.errorMessage%} <p>{{field.errorMessage}}</p>{% endif %}
-                    <label for="{{field.name}}">{{field.label}}</label></br>
-                    <Input type="{{field.type}}" id="{{field.name}}" name="{{field.name}}" value="{{field.value}}">
-                </div>
-            {% else %}
-                <div>
-                    {%if field.errorMessage%} <p>{{field.errorMessage}}</p>{% endif %}
-                    <label for="{{field.name}}">{{field.label}}</label></br>
-                    <textarea id="{{field.name}}" name="{{field.name}}" rows="{{field.rows}}" cols="{{field.cols}}">{{field.value}}</textarea>
-                </div>
-            {% endif %}
-        {% endfor %}
-        <div>
-            <input type="submit" value="{{submitValue}}"> 
-        </div>
+        <div class="row">
+            {% for field in form.fields %}
+                {% if field.fieldType == 'Input' %}
+                    <div class="col-md-12">                        
+                        <label for="{{field.name}}">{{field.label}}</label></br>
+                        <Input type="{{field.type}}" class="input-style" id="{{field.name}}" name="{{field.name}}" value="{{field.value}}">
+                        {%if field.errorMessage%}
+                        <div class="invalid-feedback">
+                            <div class="alert alert-danger">
+                                <strong>{{field.errorMessage}}</strong>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="col-md-12">
+                        <label for="{{field.name}}">{{field.label}}</label></br>
+                        <textarea id="{{field.name}}" class="input-style" name="{{field.name}}" rows="{{field.rows}}" cols="{{field.cols}}">{{field.value}}</textarea>
+                        {%if field.errorMessage%}
+                        <div class="invalid-feedback">
+                            <div class="alert alert-danger">
+                                <strong>{{field.errorMessage}}</strong>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="col-md-12">
+                <input type="submit" class="flat-btn" value="{{submitValue}}"> 
+            </div>
+        </div>    
     </form>
-</section>
+</div>
 {% endmacro %}       
         
