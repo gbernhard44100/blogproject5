@@ -6,13 +6,31 @@
 
 
 {% block content %}
-    <P>Ci-dessous : la liste des articles</p>
-    
-    {% for blogpost in blogPosts %}
-        <div>
-            <H1>{{blogpost.title}}</H1>
-            <H4>Par {{blogpost.author}}, le {{blogpost.updateDate}}</H4>
-            <p>{{blogpost.content | slice(0, 200)}}</p><a href="/blogpost/{{blogpost.id}}">lire la suite...</a>
+    <div class="inner-head overlap">
+            <div data-velocity="-.2" style="background: url(http://placehold.it/1500x1100) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->	
+            <div class="container">
+                    <div class="inner-content">
+                            <span><i class="fa fa-code"></i></span>
+                            <h2>MES BLOGPOSTS</h2>
+                            <h3>Ci-dessous vous trouverez la liste de tous mes BlogPosts</h3>
+                    </div>
+            </div>
+    </div><!-- inner Head -->
+
+    <section class="block">
+        <div class="container">
+            {% for blogpost in blogPosts %}
+                <div class="row">
+                    <div class="col-sm-2"><a href="/blogpost/{{blogpost.id}}"><img src="Public/images/diary.png" alt="diary" class="img-responsive"></a>
+                    </div>
+                    <div class="col-sm-8">
+                    <h1 class="title">{{blogpost.title}}</h1>
+                    <h4 class="text-muted">Par {{blogpost.author}}, le {{blogpost.updateDate}}</h4>
+                    <p>{{blogpost.content | slice(0, 200)}} <a href="/blogpost/{{blogpost.id}}">... Lire la suite</a></p>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </section>
 {% endblock %}

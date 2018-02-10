@@ -6,31 +6,54 @@
 
 
 {% block content %}
-    <H1>Page Admin</H1>
-    
-    <p>Pour ajourter un article :  <a href="/admin/pageajoutblogPost">cliquer ici</a></p>
-    
-    <p>Voir la liste des inscrits : <a href="/admin/inscriptions">cliquer ici</a></p>
-    
-    <table>
-            <thead>
-                <th>Date</th>
-                <th>Auteur</th>
-                <th>Titre</th>
-                <th>Début du texte de l'article</th>    
-            </thead>                
-            <tbody>
-                {% for blogpost in blogPosts %}
-                    <tr>
-                        <td>Le {{blogpost.updateDate}}</td>
-                        <td>{{blogpost.author}}</td>
-                        <td>{{blogpost.title}}</td>
-                        <td>{{blogpost.content | slice(0, 200)}}</td>
-                        <td><a href="/admin/blogpost/{{blogpost.id}}/modifier">Modifier</a></td>
-                        <td><a href="/admin/blogpost/{{blogpost.id}}/supprimer">Supprimer</a></td>
-                        <td><a href="/admin/blogpost/{{blogpost.id}}/commentaires">Commentaires</a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>    
-    </table>
+    <div class="inner-head overlap">
+        <div data-velocity="-.2" style="background: url(http://placehold.it/1500x1100) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->	
+        <div class="container">
+                <div class="inner-content">
+                        <span><i class="fa fa-code"></i></span>
+                        <h2>MA PAGE ADMIN</h2>
+                </div>
+        </div>
+    </div><!-- inner Head -->
+    <section class="block">
+		<div class="container">
+			<div class="row">
+                            <a style="margin-left: 5%;" href="/admin/pageajoutblogPost"><button type="button" class="btn btn-default"><h3><strong>Ajouter un article</strong></h3></button></a>
+                        </div>
+                        <hr>
+                        <div class="row">    
+                            <a style="margin-left: 5%;" href="/admin/inscriptions"><button type="button" class="btn btn-default"><h3><strong>Voir la liste des inscrits</strong></h3></button></a>          
+                        </div>
+                        <hr>
+                        <div class="row table table-responsive">
+                            
+                                    <table class="table table-striped table-bordered ">
+                                        <thead style="background: #000;border: none; color: white;">
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Auteur</th>
+                                            <th scope="col">Titre</th>
+                                            <th scope="col">Début du texte de l'article</th> 
+                                        </thead>                
+                                        <tbody>
+                                            {% for blogpost in blogPosts %}
+                                                <tr>
+                                                    <td style="min-width: 125px;">Le {{blogpost.updateDate}}</td>
+                                                    <td>{{blogpost.author}}</td>
+                                                    <td style="min-width: 200px;">{{blogpost.title}}</td>
+                                                    <td style="min-width: 400px;">{{blogpost.content | slice(0, 200)}}</td>
+                                                    <th scope="row" style="border: none;">
+                                                        <div class="btn-group-vertical">
+                                                                <a class="btn btn-primary" role="button" aria-disabled="true" href="/admin/blogpost/{{blogpost.id}}/commentaires">Commentaires</a>
+                                                                <a class="btn btn-warning" role="button" aria-disabled="true" href="/admin/blogpost/{{blogpost.id}}/modifier">Modifier</a>
+                                                                <a class="btn btn-danger" role="button" aria-disabled="true" href="/admin/blogpost/{{blogpost.id}}/supprimer">Supprimer</a>
+                                                        </div>   
+                                                    </th>        
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>    
+                                    </table>                                   
+                        </div>
+                </div>
+    </section>  
+
 {% endblock %}
