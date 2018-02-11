@@ -48,7 +48,7 @@ class BlogPostController extends BackController{
         $blogpost->hydrateFromPostRequest($request);
         $blogpost->setUpdateDate(date("Y-m-d H:i:s"));
         $form =new BlogPostForm($blogpost,'/admin/addblogPost');
-
+        
         if($form->isValid()){
             $manager = $this->managers->getManagerOf('BlogPost');
             $manager->add($blogpost);
@@ -56,6 +56,7 @@ class BlogPostController extends BackController{
         }
         else{
             $this->page->addVar('form',$form);
+            $this->setView('ShowAddBlogPostPage');
         }
     }   
     
@@ -82,6 +83,7 @@ class BlogPostController extends BackController{
         }
         else{
             $this->page->addVar('form',$form);
+            $this->setView('ShowUpdateBlogPostPage');
         }
     }
     
@@ -109,6 +111,7 @@ class BlogPostController extends BackController{
         }
         else{
             $this->page->addVar('commentForm',$form);
+            $this->setView('ShowBlogPost');
         }
     }    
     
@@ -153,7 +156,7 @@ class BlogPostController extends BackController{
         {
             $_SESSION = array();
             session_destroy();
-            $this->page->addVar('flash',
+            $this->page->addVar('redflash',
                         'Vous devez vous connecter et permettre l\'accès aux cookies pour pouvoir vous connecter');
         }
         /* Si l'Url commence par "/admin" et qu'il n'y a pas de ticket valide,

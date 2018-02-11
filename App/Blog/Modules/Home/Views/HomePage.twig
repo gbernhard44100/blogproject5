@@ -136,10 +136,10 @@
 						</ul>
 						<div class="our-clients-sec">
 							<ul>
-								<li style="margin: 30px;">
+								<li>
 									<a href="https://www.linkedin.com/in/gaëtan-bernhard-b0b9074a" title="Profil_LinkedIn"><img src="Public/images/logo-LinkedIn.png" alt="Logo LinkedIn" /></a>
 								</li>
-								<li style="margin: 30px;">
+								<li>
 									<a href="Public/BERNHARD_G-CV.pdf" title="CV_en_pdf"><img src="Public/images/logo-cv-pdf.png" alt="CV_en_pdf" /></a>
 								</li>
 							</ul>
@@ -163,28 +163,29 @@
 								<div id="contact">
 									<div id="message"></div>
 									<div class="form">
-										<form method="post" action="contact.php" name="contactform" id="contactform">
+										<form method="post" action="/contactform" name="contactform" id="contactform">
 											<div class="row">
 												<div class="col-md-12">
-													<i class="fa fa-user"></i>
-													<input name="name" type="text" id="name" class="input-style" placeholder="Name" />
+													<label for="name">Nom et Prénom :</label>
+													<input name="name" type="text" id="name" class="input-style"/>
 												</div>
 												<div class="col-md-12">
-													<i class="fa fa-at"></i>
-													<input name="email" type="text" id="email" class="input-style" placeholder="Email" />
+													<label for="name">E-mail :</label>
+													<input name="email" type="text" id="email" class="input-style"/>
 												</div>
 												<div class="col-md-12">
-													<i class="fa fa-pencil"></i>
-													<textarea name="comments" id="comments" class="input-style" placeholder="Message"></textarea>
+													<label for="name">Votre message :</label>
+													<textarea name="comments" id="comments" class="input-style"></textarea>
 												</div>
 												<div class="col-md-12">
-													<input type="submit"  class="flat-btn" id="submit" type="submit" value="Submit" />
+													<input type="submit"  class="flat-btn" id="submit" type="submit" value="Envoyer" />
 												</div>
 											</div>
 										</form>
 									</div>
 								</div>
 							</div>
+                                                        <hr>
 							<div class="col-md-6 column">
 								<div class="contact-details">
 									<div class="contact-infos">

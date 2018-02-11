@@ -30,7 +30,7 @@
 			<div class="container">
 				<ul class="contact-item">
 					<li><i class="fa fa-envelope-o"></i>gaetan.bernhard@gmail.com</li>
-					<li><i class="fa fa-mobile"></i>+7 998 71 150 / +7 998 30 20</li>
+					<li><i class="fa fa-mobile"></i>+33 6 80 99 08 80</li>
 				</ul>
 			</div>
 		</div><!-- Top bar -->
@@ -45,11 +45,9 @@
                         </div><!-- LOGO -->
                         <div class="popup-client">
                             {% if session.auth is defined %}
-                                <a style="margin: 39px 0; padding: 13px 30px; border-radius: 30px;"
-                                   class="btn btn-primary" role="button" aria-disabled="true" href="/sedeconnecter" ><span><i class="fa fa-user"></i> /  Se déconnecter</span></a>
+                                <a class="btn btn-primary" role="button" aria-disabled="true" href="/sedeconnecter" ><span><i class="fa fa-user"></i> /  Se déconnecter</span></a>
                             {% else %}
-                                <a style="margin: 39px 0; padding: 13px 30px; border-radius: 30px;"
-                                   class="btn btn-primary" role="button" aria-disabled="true" href="/demandeconnexion" ><span><i class="fa fa-user"></i> /  Se connecter</span></a>
+                                <a class="btn btn-primary" role="button" aria-disabled="true" href="/demandeconnexion" ><span><i class="fa fa-user"></i> /  Se connecter</span></a>
                             {% endif %}                                        
                         </div>
                         <span class="menu-toggle"><i class="fa fa-bars"></i></span>
@@ -66,10 +64,18 @@
                 </div>
         </div>
     </header>
-    {% if flash is defined %}
+    {% if redflash is defined %}
         <div class="alert alert-danger" role="alert">
-            <h4><strong>{{flash}}</strong></h4>
+            <h4><strong>{{redflash}}</strong></h4>
         </div>
+    {% elseif yellowflash is defined %}
+        <div class="alert alert-warning" role="alert" >
+            <h4><strong>{{yellowflash}}</strong></h4>
+        </div>
+    {% elseif greenflash is defined %}
+        <div class="alert alert-success" role="alert">
+            <h4><strong>{{greenflash}}</strong></h4>
+        </div>    
     {% endif %}
 	
     {% block content %}{%endblock%}
@@ -78,7 +84,7 @@
         <div class="bottom-line">
             <div class="container">
                 <ul>
-                    <li><a href="/admin"><strong style="padding-right: 20px; font-size: 25px;">ACCES A LA PAGE ADMIN</strong><img src="Public/images/key.png" alt="key"></a></li>
+                    <li><a href="/admin"><strong>ACCES A LA PAGE ADMIN</strong><img src="Public/images/key.png" alt="key"></a></li>
                 </ul>
             </div>
         </div>

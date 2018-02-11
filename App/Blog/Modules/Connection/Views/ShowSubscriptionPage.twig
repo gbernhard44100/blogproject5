@@ -16,12 +16,13 @@
         </div>
     </div><!-- inner Head -->
     <section class="block">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-                                    {{ formular.createView(form,'S\'inscrire') | raw }}
-                                </div>
-                        </div>
-                </div>
+	<div class="container">
+            <p>Vous devez remplir le formulaire ci-dessous pour vous inscrire. Une fois le formulaire validé par un de nos administrateurs, vous pourrez vous connecter.</p>
+        <div>    
+        <div class="container">
+            <div class="row">
+                    {{ formular.createView(form,'S\'inscrire') | raw }}
+            </div>
+        </div>
     </section>
 {% endblock %}

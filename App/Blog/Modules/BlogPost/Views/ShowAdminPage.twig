@@ -18,17 +18,17 @@
     <section class="block">
 		<div class="container">
 			<div class="row">
-                            <a style="margin-left: 5%;" href="/admin/pageajoutblogPost"><button type="button" class="btn btn-default"><h3><strong>Ajouter un article</strong></h3></button></a>
+                            <a href="/admin/pageajoutblogPost"><button type="button" class="btn btn-default"><h3><strong>Ajouter un article</strong></h3></button></a>
                         </div>
                         <hr>
                         <div class="row">    
-                            <a style="margin-left: 5%;" href="/admin/inscriptions"><button type="button" class="btn btn-default"><h3><strong>Voir la liste des inscrits</strong></h3></button></a>          
+                            <a href="/admin/inscriptions"><button type="button" class="btn btn-default"><h3><strong>Voir la liste des inscrits</strong></h3></button></a>          
                         </div>
                         <hr>
                         <div class="row table table-responsive">
                             
                                     <table class="table table-striped table-bordered ">
-                                        <thead style="background: #000;border: none; color: white;">
+                                        <thead>
                                             <th scope="col">Date</th>
                                             <th scope="col">Auteur</th>
                                             <th scope="col">Titre</th>
@@ -37,7 +37,7 @@
                                         <tbody>
                                             {% for blogpost in blogPosts %}
                                                 <tr>
-                                                    <td style="min-width: 125px;">Le {{blogpost.updateDate}}</td>
+                                                    <td style="min-width: 170px;">Le {{blogpost.updateDate |date('d/m/Y')}}</br> à {{blogpost.updateDate |date('g')}}h{{blogpost.updateDate |date('i')}}</td>
                                                     <td>{{blogpost.author}}</td>
                                                     <td style="min-width: 200px;">{{blogpost.title}}</td>
                                                     <td style="min-width: 400px;">{{blogpost.content | slice(0, 200)}}</td>
