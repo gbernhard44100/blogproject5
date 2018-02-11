@@ -6,50 +6,50 @@
 {% import "form.twig" as formular %}
 {% block content %}
     <section class="block">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">	
-					<div class="row">
-						<div class="col-md-12">
-							<div class="single-post-sec">
-								<div class="row" class="blog-post">
-                                                                    <H1>{{blogPost.title}}</H1>
-                                                                    <H4>Par {{blogPost.author}}, le {{blogPost.updateDate | date('d/m/Y')}}</H4>
-                                                                    <p><strong>{{blogPost.content|slice(0,200)}}</strong>{{blogPost.content|truncate(200)}}</p>
-                                                                </div>                                                                
-                                                                
-                                                                <hr>
-                                                                <div class="row">
-                                                                <ul class="media-list">
-                                                                    {% for comment in comments %}
-                                                                        {% if comment.valid == true %}
-                                                                            <li class="media">
-                                                                                <div class="media-left">
-                                                                                    <img class="media-object" src="Public/images/user.png" alt="commentator">
-                                                                                </div>
-                                                                                <div class="media-body">
-                                                                                    <h4 class="media-heading">{{comment.author}}, le {{comment.updateDate | date('d/m/Y')}} à {{blogpost.updateDate |date('g')}}h{{blogpost.updateDate |date('i')}}</h5>
-                                                                                    {{comment.content}}
-                                                                                </div>
-                                                                            </li>
-                                                                        {% endif %}
-                                                                    {% endfor %}
-                                                                </ul>
-                                                                <hr>
-                                                                </div>
-                                                                <div class="form">
-                                                                    <div class="heading3">
-                                                                            <h3>Comment Form</h3>
-                                                                            <span>N'hésitez pas à ajouter des commentaires! Une fois votre commentaire envoyé, celui-ci sera soumis à validation.</span>
-                                                                    </div>
-                                                                    {{ formular.createView(commentForm,'Poster le commentaire')}}
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">	
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="single-post-sec">
+                                <div class="row" class="blog-post">
+                                    <H1>{{blogPost.title}}</H1>
+                                    <H4>Par {{blogPost.author}}, le {{blogPost.updateDate | date('d/m/Y')}}</H4>
+                                    <p><strong>{{blogPost.content|slice(0,200)}}</strong>{{blogPost.content|truncate(200)}}</p>
+                                </div>                                                                
+
+                                <hr>
+                                <div class="row">
+                                    <ul class="media-list">
+                                        {% for comment in comments %}
+                                            {% if comment.valid == true %}
+                                                <li class="media">
+                                                    <div class="media-left">
+                                                        <img class="media-object" src="Public/images/user.png" alt="commentator">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">{{comment.author}}, le {{comment.updateDate | date('d/m/Y')}} à {{blogpost.updateDate |date('g')}}h{{blogpost.updateDate |date('i')}}</h5>
+                                                            {{comment.content}}
+                                                    </div>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    <hr>
                                 </div>
+                                <div class="form">
+                                    <div class="heading3">
+                                        <h3>Comment Form</h3>
+                                        <span>N'hésitez pas à ajouter des commentaires! Une fois votre commentaire envoyé, celui-ci sera soumis à validation.</span>
+                                    </div>
+                                    {{ formular.createView(commentForm,'Poster le commentaire')}}
+                                </div>
+                            </div>
                         </div>
+                    </div>
                 </div>
+            </div>
+        </div>
     </section>
 {% endblock %}                                                           
 

@@ -9,19 +9,19 @@
     <div class="inner-head overlap">
         <div data-velocity="-.2" style="background: url(http://placehold.it/1500x1100) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->	
         <div class="container">
-                <div class="inner-content">
-                        <span><i class="fa fa-code"></i></span>
-                        <h2>INSCRIPTION A LA PAGE ADMIN</h2>
-                </div>
+            <div class="inner-content">
+                <span><i class="fa fa-code"></i></span>
+                <h2>INSCRIPTION A LA PAGE ADMIN</h2>
+            </div>
         </div>
     </div><!-- inner Head -->
     <section class="block">
-	<div class="container">
-            <p>Vous devez remplir le formulaire ci-dessous pour vous inscrire. Une fois le formulaire validé par un de nos administrateurs, vous pourrez vous connecter.</p>
-        <div>    
         <div class="container">
-            <div class="row">
-                    {{ formular.createView(form,'S\'inscrire') | raw }}
+            <p>Vous devez remplir le formulaire ci-dessous pour vous inscrire. Une fois le formulaire validé par un de nos administrateurs, vous pourrez vous connecter.</p>
+            <div>    
+                <div class="container">
+                    <div class="row">
+                        {{ formular.createView(form,'S\'inscrire') | raw }}
             </div>
         </div>
     </section>

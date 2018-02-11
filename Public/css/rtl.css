@@ -67,7 +67,7 @@ body {direction: rtl; }
 .menu-toggle {float: left; margin-left: 10px; }
 
 @media (max-width: 1200px) {
-.popup-client {margin: 0; }
+    .popup-client {margin: 0; }
 
 }
 

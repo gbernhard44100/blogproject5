@@ -1,9 +1,11 @@
 <?php
+
 namespace Lib\GBFram\Form;
 
 use Lib\GBFram\Hydrator;
 
 abstract class Field {
+
     Protected $label;
     Protected $name;
     Protected $value;
@@ -12,68 +14,62 @@ abstract class Field {
     protected $errorMessage;
 
     use Hydrator;
-    
+
     public function __construct(array $data) {
         $this->hydrate($data);
     }
 
-    public function label(){
+    public function label() {
         return $this->label;
     }
-    
-    public function name(){
+
+    public function name() {
         return $this->name;
     }
-    
-    public function value(){
+
+    public function value() {
         return $this->value;
     }
-    
-    public function validators(){
+
+    public function validators() {
         return $this->validators;
     }
-        
-    public function fieldType(){
+
+    public function fieldType() {
         return $this->fieldType;
     }
-    
-    public function errorMessage(){
+
+    public function errorMessage() {
         return $this->errorMessage;
     }
-    
-    public function setLabel(string $label){
+
+    public function setLabel(string $label) {
         $this->label = $label;
     }
 
-    public function setName(string $name){
+    public function setName(string $name) {
         $this->name = $name;
     }
-    
-    public function setValue($value){
+
+    public function setValue($value) {
         $this->value = $value;
     }
-    
-    public function setValidators(array $validators)
-    {
-        foreach ($validators as $validator)
-        {
-            if ($validator instanceof Validator && !in_array($validator, $this->validators))
-            {
+
+    public function setValidators(array $validators) {
+        foreach ($validators as $validator) {
+            if ($validator instanceof Validator && !in_array($validator, $this->validators)) {
                 $this->validators[] = $validator;
             }
         }
     }
-    
-    public function setFieldType(string $fieldType){
+
+    public function setFieldType(string $fieldType) {
         $this->fieldType = $fieldType;
     }
-    
-    public function isValid()
-    {
-        foreach ($this->validators as $validator)
-        {
-            if (!$validator->isValid($this->value))
-            {
+
+    public function isValid() {
+        foreach ($this->validators as $validator) {
+            if (!$validator->isValid($this->value)) {
                 $this->errorMessage = $validator->errorMessage();
                 return false;
             }
@@ -81,4 +77,5 @@ abstract class Field {
 
         return true;
     }
+
 }
