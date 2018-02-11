@@ -6,3 +6,4 @@ nbproject
 mysqlconnection.xml
 app.xml
 routes.xml
+twig.xml

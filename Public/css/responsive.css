@@ -18,6 +18,13 @@
 .popup-client {
     margin-left: 25px;
 }
+
+.popup-client > a{
+    margin: 23px 0;
+    padding: 13px 30px;
+    border-radius: 30px;
+}
+
 .simple-header.for-sticky {
     float: left;
     position: relative !important;
@@ -45,6 +52,7 @@
     width: 100%;
 }
 .menu nav > ul > li > a {
+    color: #333333;
     float: left;
     padding: 17px 30px;
     width: 100%;
@@ -80,6 +88,11 @@
 .menu-toggle{
     display: block;
 }
+
+.alert{
+    margin-top: 145px;
+}
+
 .services-sec .all-services {
     padding-top: 80px;
 }
@@ -173,6 +186,10 @@
 }
 
 @media (min-width: 768px) and (max-width: 980px) {
+.alert{
+    margin-top: 185px;
+}
+    
 .product-sec .row > div {
     float: left;
     width: 50%;
@@ -241,6 +258,13 @@
 .popup-client > span i {
     color: white;
 }
+
+.popup-client > a{
+    margin: 23px 0;
+    padding: 13px 30px;
+    border-radius: 30px;
+}
+
 header.for-sticky .popup-client > span:hover {
     color: transparent !important;
 }
@@ -400,6 +424,11 @@ blockquote {
 }
 
 @media (max-width: 767px) {
+
+.alert{
+    margin-top: 185px;
+}
+    
 .cart-thumb > span {
     float: left;
     width: 70px;
@@ -728,9 +757,22 @@ td {
 table {
 }
 
+.form > form .row > div, input, textArea{
+    margin-bottom: 7%;
+}
+
+.our-clients-sec li a{
+    padding: 0px;
+}
+
 }
 
 @media (max-width: 480px)  {
+
+.alert{
+    margin-top: 270px;
+}
+     
 .product-sec .row > div {
     float: left;
     width: 100%;
@@ -842,9 +884,19 @@ table {
     font-size: 18px;
     line-height: 27px;
 }
+
+.menu nav{
+    left: 0;
+}
+
 .menu nav > ul > li > a {
     color: #333333;
 }
+
+.menu-toggle{
+    margin-right: 75px;
+}
+
 header.simple-header.white.for-sticky .popup-client > span:hover i {
     color: #ffffff;
 }
@@ -970,5 +1022,16 @@ header .menu-item-has-children > ul > li > a {
     margin-right: 13px;
 }
 
+.bottom-line ul li > a {
+    font-size: 16px;
+}
+
+.form > form .row > div, input, textArea{
+    margin-bottom: 7%;
+}
+
+.our-clients-sec{
+    padding : 0px;
+}
 
 }

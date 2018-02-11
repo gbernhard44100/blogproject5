@@ -66,7 +66,7 @@ p{
     font-family:Nunito;
     color:#666666;
     line-height:26px;
-    font-size:17px;
+    font-size:20px;
     letter-spacing:0.4px;
 }
 ul li ,ul li a,
@@ -473,9 +473,6 @@ iframe{
     trasnition:all 0.4s ease 0s;
 }
 
-
-
-
 .menu nav > ul > li:hover > a{
     color: #fff;
 }
@@ -485,12 +482,13 @@ iframe{
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.3px;
-
 }
+
 .popup-client {
     float: right;
     margin-left: 65px;
 }
+
 .popup-client > span {
     background: #353535 none repeat scroll 0 0;
     
@@ -519,6 +517,17 @@ iframe{
 .popup-client > span i {
     font-size: 16px;
     margin-right: 4px;
+}
+
+.popup-client > a{
+    margin: 39px 0;
+    padding: 13px 30px;
+    border-radius: 30px;
+}
+
+
+.alert{
+    margin-bottom: 0px;
 }
 
 /*=============== Inner Head ===================*/
@@ -1119,9 +1128,10 @@ aside .widget:first-child {
 .bottom-line ul li > a {
     color: #ffffff;
     float: left;
-    font-size: 13px;
+    font-size: 25px;
     font-weight: 600;
     letter-spacing: 0.3px;
+    padding-right: 20px;
 }
 
 /*=============== Heading 1 ===================*/
@@ -1209,7 +1219,7 @@ aside .widget:first-child {
     color: #979797;
     float: left;
     font-family: Nunito;
-    font-size: 13px;
+    font-size: 20px;
     width: 100%;
 }
 
@@ -1528,22 +1538,22 @@ blockquote p {
 }
 
 
-.comment-form {
+form {
     float: left;
-    margin-top: 70px;
+    margin-top: 25px;
     width: 100%;
 }
-.comment-form > form {
+form > form {
     float: left;
     width: 100%;
 }
-.comment-form > form label {
+form > form label {
     float: left;
     margin-bottom: 10px;
     position: relative;
     width: 100%;
 }
-.comment-form form label input, .comment-form form label textarea {
+form label input, .form label textarea {
     background: #f9f9f9 none repeat scroll 0 0;
     border: medium none;
     color: #a7a7a7;
@@ -1553,14 +1563,14 @@ blockquote p {
     padding: 21px 70px;
     width: 100%;
 }
-.comment-form form label i {
+.form form label i {
     color: #dcdcdc;
-    font-size: 14px;
+    font-size: 20px;
     left: 40px;
     position: absolute;
     top: 24px;
 }
-.comment-form form label textarea {
+.form form label textarea {
     min-height: 180px;
 }
 .flat-btn {
@@ -2670,6 +2680,7 @@ blockquote p {
 }
 .our-clients-sec li a {
     opacity: 0.5;
+    padding: 30px;
 }
 .our-clients-sec li a:hover{
     opacity: 1;
@@ -2804,8 +2815,8 @@ blockquote p {
     float: left;
     width: 100%;
 }
-.form > form .row > div {
-    margin-bottom: 10px;
+.form > form .row > div, input, textArea {
+    margin-bottom: 2%;
     position: relative;
 }
 .form > form .row > div > input[type="text"],.form > form .row > div > input[type="password"], .form > form .row > div > textarea {
@@ -2813,9 +2824,9 @@ blockquote p {
     border: medium none;
     float: left;
     font-family: Nunito;
-    font-size: 15px;
+    font-size: 20px;
     height: 68px;
-    padding: 18px 80px;
+    padding: 10px 18px;
     width: 100%;
 }
 .form > form .row > div > i {
@@ -4737,8 +4748,8 @@ footer.light-footer .bottom-line span {
 }
 footer.light-footer .bottom-line a {
     color: #444444;
+    
 }
-
 
 /* Cool Features */
 .cool-features {
@@ -4893,6 +4904,12 @@ footer.light-footer .bottom-line a {
     color: #ffffff;
     margin-bottom: 10px;
     padding: 20px 40px;
+}
+
+.table > thead{
+    background: #000;
+    border: none;
+    color: white;
 }
 
 

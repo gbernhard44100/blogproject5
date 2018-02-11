@@ -11,14 +11,19 @@ class Page extends ApplicationComponent
   protected $twig;
   protected $twig_templates_path = array();
   
-  function __construct(Application $app, $module) {
+  function __construct(Application $app) {
     parent::__construct($app);
     
-    if(!empty($module)){
-        $this->twig_templates_path[] = 'App/'.$app->name().'/Modules/'.$module.'/Views';        
-    }
-    $this->twig_templates_path[] = 'App/'.$app->name().'/Templates';
-    $this->twig_templates_path[] = 'Errors';
+    $xml = new \DOMDocument;
+    $xml->load(__DIR__.'/../../App/'.$this->app->name().'/Config/twig.xml');
+
+    $elements = $xml->getElementsByTagName('define');
+
+    foreach ($elements as $element)
+    {
+        $this->twig_templates_path[] = $element->getAttribute('path');
+    }        
+
     $templatesloader = new FilesystemLoader($this->twig_templates_path);
     $this->twig = new Environment($templatesloader,array(
     'cache' => FALSE,

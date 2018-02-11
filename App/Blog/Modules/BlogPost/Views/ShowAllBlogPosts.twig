@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-sm-8">
                     <h1 class="title">{{blogpost.title}}</h1>
-                    <h4 class="text-muted">Par {{blogpost.author}}, le {{blogpost.updateDate}}</h4>
+                    <h4 class="text-muted">Par {{blogpost.author}}, le {{blogpost.updateDate |date('d/m/Y')}}</h4>
                     <p>{{blogpost.content | slice(0, 200)}} <a href="/blogpost/{{blogpost.id}}">... Lire la suite</a></p>
                     </div>
                 </div>
