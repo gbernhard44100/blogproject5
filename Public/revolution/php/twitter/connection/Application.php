@@ -1,10 +1,11 @@
 <?php
+
 namespace TwitterPhp\Connection;
 
 use TwitterPhp\RestApiException;
 
-class Application extends Base
-{
+class Application extends Base {
+
     /**
      * @var string
      */
@@ -24,8 +25,7 @@ class Application extends Base
      * @param string $consumerKey
      * @param string $consumerSecret
      */
-    public function __construct($consumerKey,$consumerSecret)
-    {
+    public function __construct($consumerKey, $consumerSecret) {
         $this->_consumerKey = $consumerKey;
         $this->_consumerSecret = $consumerSecret;
     }
@@ -36,11 +36,10 @@ class Application extends Base
      * @param $method
      * @return array
      */
-    protected function _buildHeaders($url,array $parameters = null,$method)
-    {
+    protected function _buildHeaders($url, array $parameters = null, $method) {
         return $headers = array(
-                    "Authorization: Bearer " . $this->_getBearerToken()
-                );
+            "Authorization: Bearer " . $this->_getBearerToken()
+        );
     }
 
     /**
@@ -60,7 +59,7 @@ class Application extends Base
                 "Authorization: Basic " . $token
             );
 
-            $options = array (
+            $options = array(
                 CURLOPT_URL => self::TWITTER_API_AUTH_URL,
                 CURLOPT_HTTPHEADER => $headers,
                 CURLOPT_POST => 1,
@@ -77,4 +76,5 @@ class Application extends Base
         }
         return $this->_bearersToken;
     }
+
 }

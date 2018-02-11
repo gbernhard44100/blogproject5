@@ -15,42 +15,43 @@ use \Lib\GBFram\Entity;
  *
  * @author CathyGaetanB
  */
-class Connection extends Entity{
-    
+class Connection extends Entity {
+
     protected $id;
     protected $username;
     protected $password;
     protected $valid = FALSE;
-    
+
     public function id() {
         return $this->id;
     }
-    
+
     public function username() {
         return $this->username;
     }
-    
+
     public function password() {
         return $this->password;
     }
-    
-    public function valid(){
+
+    public function valid() {
         return $this->valid;
     }
-    
-    public function setValid(){
+
+    public function setValid() {
         $this->valid = TRUE;
     }
-    
+
     public function setId($id) {
         $this->id = $id;
     }
-    
+
     public function setUsername($username) {
         $this->username = $username;
     }
-    
+
     public function setPassword($password) {
         $this->password = $password;
     }
+
 }

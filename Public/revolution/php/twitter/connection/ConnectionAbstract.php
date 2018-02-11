@@ -1,4 +1,5 @@
 <?php
+
 namespace TwitterPhp\Connection;
 
 /**
@@ -6,8 +7,8 @@ namespace TwitterPhp\Connection;
  * @package TwitterPhp
  * @subpackage Connection
  */
-abstract class Base
-{
+abstract class Base {
+
     /**
      * Url for Twitter api
      */
@@ -44,8 +45,7 @@ abstract class Base
      * @param $method
      * @return array
      */
-    abstract protected function _buildHeaders($url,array $parameters = null,$method);
-
+    abstract protected function _buildHeaders($url, array $parameters = null, $method);
 
     /**
      * Do GET request to Twitter api
@@ -56,12 +56,11 @@ abstract class Base
      * @param array $parameters
      * @return mixed
      */
-    public function get($resource, array $parameters = array())
-    {
+    public function get($resource, array $parameters = array()) {
         $url = $this->_prepareUrl($resource);
-        $headers = $this->_buildHeaders($url,$parameters,self::METHOD_GET);
+        $headers = $this->_buildHeaders($url, $parameters, self::METHOD_GET);
         $url = $url . '?' . http_build_query($parameters);
-        $curlParams = array (
+        $curlParams = array(
             CURLOPT_URL => $url,
             CURLOPT_HTTPHEADER => $headers
         );
@@ -78,11 +77,10 @@ abstract class Base
      * @param array $parameters
      * @return mixed
      */
-    public function post($resource, array $parameters = array())
-    {
+    public function post($resource, array $parameters = array()) {
         $url = $this->_prepareUrl($resource);
-        $headers = $this->_buildHeaders($url,$parameters,self::METHOD_POST);
-        $curlParams = array (
+        $headers = $this->_buildHeaders($url, $parameters, self::METHOD_POST);
+        $curlParams = array(
             CURLOPT_URL => $url,
             CURLOPT_POST => 1,
             CURLOPT_POSTFIELDS => $parameters,
@@ -98,23 +96,22 @@ abstract class Base
      * @param array $params
      * @return array
      */
-    protected function _callApi(array $params)
-    {
+    protected function _callApi(array $params) {
         $curl = curl_init();
-        curl_setopt_array($curl,$params);
+        curl_setopt_array($curl, $params);
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, self::DEFAULT_TIMEOUT);
         $response = curl_exec($curl);
-        return json_decode($response,true);
+        return json_decode($response, true);
     }
 
     /**
      * @param string $resource
      * @return string
      */
-    private function _prepareUrl($resource)
-    {
-        return self::TWITTER_API_URL . '/' . self::TWITTER_API_VERSION . '/' . ltrim($resource,'/') . '.json';
+    private function _prepareUrl($resource) {
+        return self::TWITTER_API_URL . '/' . self::TWITTER_API_VERSION . '/' . ltrim($resource, '/') . '.json';
     }
+
 }

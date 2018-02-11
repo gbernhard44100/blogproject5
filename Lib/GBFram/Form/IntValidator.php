@@ -13,13 +13,14 @@ namespace Lib\GBFram\Form;
  *
  * @author CathyGaetanB
  */
-class IntValidator extends Validator
-{
+class IntValidator extends Validator {
+
     function __construct($errorMessage) {
         parent::__construct($errorMessage);
     }
-    
-    public function isValid($value){
-        return is_int($value) && $value>0 ? TRUE : FALSE;
+
+    public function isValid($value) {
+        return is_int($value) && $value > 0 ? TRUE : FALSE;
     }
+
 }

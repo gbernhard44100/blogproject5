@@ -1,83 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-{% block title %}{%endblock%}
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}{%endblock%}
 
-<base href="/" />
-<!-- Styles -->
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" /><!-- Bootstrap -->
-<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" /><!-- Icons -->
-<link rel="stylesheet" href="css/owl.carousel.css" type="text/css" /><!-- Owl Carousal -->
+    <base href="/" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" /><!-- Bootstrap -->
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" /><!-- Icons -->
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" /><!-- Owl Carousal -->
 
-<link rel="stylesheet" href="css/style.css" type="text/css" /><!-- Style -->	
-<link rel="stylesheet" href="css/responsive.css" type="text/css" /><!-- Responsive -->	
-<link rel="stylesheet" href="css/colors/colors.css" type="text/css" /><!-- color -->	
+    <link rel="stylesheet" href="css/style.css" type="text/css" /><!-- Style -->	
+    <link rel="stylesheet" href="css/responsive.css" type="text/css" /><!-- Responsive -->	
+    <link rel="stylesheet" href="css/colors/colors.css" type="text/css" /><!-- color -->	
 
 
-<!-- REVOLUTION STYLE SHEETS -->
-<link rel="stylesheet" type="text/css" href="revolution/css/settings.css">
-<!-- REVOLUTION LAYERS STYLES -->
-<link rel="stylesheet" type="text/css" href="revolution/css/layers.css">	
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="revolution/css/settings.css">
+    <!-- REVOLUTION LAYERS STYLES -->
+    <link rel="stylesheet" type="text/css" href="revolution/css/layers.css">	
 
 </head>
 <body>
 
-<div class="theme-layout">
-	<header class="simple-header for-sticky">
-		<div class="top-bar">
-			<div class="container">
-				<ul class="contact-item">
-					<li><i class="fa fa-envelope-o"></i>gaetan.bernhard@gmail.com</li>
-					<li><i class="fa fa-mobile"></i>+33 6 80 99 08 80</li>
-				</ul>
-			</div>
-		</div><!-- Top bar -->
-        <div class="menu">
+    <div class="theme-layout">
+        <header class="simple-header for-sticky">
+            <div class="top-bar">
                 <div class="container">
-                        <div class="logo">
-                                <a href="#" title="">
-                                        <i class="fa fa-code"></i>
-                                        <span>Gaëtan BERNHARD</span>
-                                        <strong>Made to be your Webdesigner</strong>
-                                </a>
-                        </div><!-- LOGO -->
-                        <div class="popup-client">
-                            {% if session.auth is defined %}
-                                <a class="btn btn-primary" role="button" aria-disabled="true" href="/sedeconnecter" ><span><i class="fa fa-user"></i> /  Se déconnecter</span></a>
-                            {% else %}
-                                <a class="btn btn-primary" role="button" aria-disabled="true" href="/demandeconnexion" ><span><i class="fa fa-user"></i> /  Se connecter</span></a>
-                            {% endif %}                                        
-                        </div>
-                        <span class="menu-toggle"><i class="fa fa-bars"></i></span>
-                        <nav>
-                                <ul>
-                                        <li>
-                                            <a href="/"><strong>ACCUEIL</strong></a>
-                                        </li>
-                                        <li>
-                                                <a href="/mesblogposts"><strong>MES ARTICLES</strong></a>
-                                        </li>
-                                </ul>
-                        </nav>			
+                    <ul class="contact-item">
+                        <li><i class="fa fa-envelope-o"></i>gaetan.bernhard@gmail.com</li>
+                        <li><i class="fa fa-mobile"></i>+33 6 80 99 08 80</li>
+                    </ul>
                 </div>
-        </div>
-    </header>
-    {% if redflash is defined %}
-        <div class="alert alert-danger" role="alert">
-            <h4><strong>{{redflash}}</strong></h4>
-        </div>
-    {% elseif yellowflash is defined %}
-        <div class="alert alert-warning" role="alert" >
-            <h4><strong>{{yellowflash}}</strong></h4>
-        </div>
-    {% elseif greenflash is defined %}
-        <div class="alert alert-success" role="alert">
-            <h4><strong>{{greenflash}}</strong></h4>
-        </div>    
-    {% endif %}
-	
+            </div><!-- Top bar -->
+            <div class="menu">
+                <div class="container">
+                    <div class="logo">
+                        <a href="#" title="">
+                            <i class="fa fa-code"></i>
+                            <span>Gaëtan BERNHARD</span>
+                            <strong>Made to be your Webdesigner</strong>
+                        </a>
+                    </div><!-- LOGO -->
+                    <div class="popup-client">
+                        {% if session.auth is defined %}
+                            <a class="btn btn-primary" role="button" aria-disabled="true" href="/sedeconnecter" ><span><i class="fa fa-user"></i> /  Se déconnecter</span></a>
+                                    {% else %}
+                            <a class="btn btn-primary" role="button" aria-disabled="true" href="/demandeconnexion" ><span><i class="fa fa-user"></i> /  Se connecter</span></a>
+                                    {% endif %}                                        
+                    </div>
+                    <span class="menu-toggle"><i class="fa fa-bars"></i></span>
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="/"><strong>ACCUEIL</strong></a>
+                            </li>
+                            <li>
+                                <a href="/mesblogposts"><strong>MES ARTICLES</strong></a>
+                            </li>
+                            <li>
+                                <a href="#contact"><strong>ME CONTACTER</strong></a>
+                            </li>
+                        </ul>
+                    </nav>			
+                </div>
+            </div>
+        </header>
+        {% if redflash is defined %}
+            <div class="alert alert-danger" role="alert">
+                <h4><strong>{{redflash}}</strong></h4>
+            </div>
+        {% elseif yellowflash is defined %}
+            <div class="alert alert-warning" role="alert" >
+                <h4><strong>{{yellowflash}}</strong></h4>
+            </div>
+        {% elseif greenflash is defined %}
+            <div class="alert alert-success" role="alert">
+                <h4><strong>{{greenflash}}</strong></h4>
+            </div>    
+        {% endif %}
+
     {% block content %}{%endblock%}
 
     <footer>
@@ -109,8 +112,8 @@
 <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
 
 <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  
-	(Load Extensions only on Local File Systems ! 
-	 The following part can be removed on Server for On Demand Loading) -->	
+        (Load Extensions only on Local File Systems ! 
+         The following part can be removed on Server for On Demand Loading) -->	
 <script type="text/javascript" src="Public/revolution/js/extensions/revolution.extension.actions.min.js"></script>
 <script type="text/javascript" src="Public/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
 <script type="text/javascript" src="Public/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
@@ -122,148 +125,148 @@
 <script type="text/javascript" src="Public/revolution/js/extensions/revolution.extension.video.min.js"></script>
 
 <script type="text/javascript">
-	var tpj=jQuery;			
-	var revapi4;
-	tpj(document).ready(function() {
-		if(tpj("#rev_slider_4_1").revolution == undefined){
-			revslider_showDoubleJqueryError("#rev_slider_4_1");
-		}else{
-			revapi4 = tpj("#rev_slider_4_1").show().revolution({
-				sliderType:"standard",
-				jsFileLocation:"revolution/js/",
-				dottedOverlay:"none",
-				delay:9000,
-				sliderLayout:"fullscreen",
-				navigation: {
-					keyboardNavigation:"off",
-					keyboard_direction: "horizontal",
-					mouseScrollNavigation:"off",
-					onHoverStop:"off",
-					touch:{
-						touchenabled:"on",
-						swipe_threshold: 75,
-						swipe_min_touches: 1,
-						swipe_direction: "horizontal",
-						drag_block_vertical: false
-					}
-					,
-					arrows: {
-						style:"zeus",
-						enable:true,
-						hide_onmobile:true,
-						hide_under:600,
-						hide_onleave:true,
-						hide_delay:200,
-						hide_delay_mobile:1200,
-						tmp:'<div class="tp-title-wrap">  	<div class="tp-arr-imgholder"></div> </div>',
-						left: {
-							h_align:"left",
-							v_align:"center",
-							h_offset:30,
-							v_offset:0
-						},
-						right: {
-							h_align:"right",
-							v_align:"center",
-							h_offset:30,
-							v_offset:0
-						}
-					}
-					,
-					bullets: {
-						enable:true,
-						hide_onmobile:true,
-						hide_under:600,
-						style:"metis",
-						hide_onleave:true,
-						hide_delay:200,
-						hide_delay_mobile:1200,
-						direction:"horizontal",
-						h_align:"center",
-						v_align:"bottom",
-						h_offset:0,
-						v_offset:30,
-						space:5,
-						tmp:'<span class="tp-bullet-img-wrap">  <span class="tp-bullet-image"></span></span><span class="tp-bullet-title">{{title}}</span>'
-					}
-				},
-				viewPort: {
-					enable:true,
-					outof:"pause",
-					visible_area:"80%"
-				},
-				responsiveLevels:[1240,1024,778,480],
-				gridwidth:[1240,1024,778,480],
-				gridheight:[600,600,500,400],
-				lazyType:"none",
-				parallax: {
-					type:"mouse",
-					origo:"slidercenter",
-					speed:2000,
-					levels:[2,3,4,5,6,7,12,16,10,50],
-				},
-				shadow:0,
-				spinner:"off",
-				stopLoop:"off",
-				stopAfterLoops:-1,
-				stopAtSlide:-1,
-				shuffle:"off",
-				autoHeight:"on",
-				hideThumbsOnMobile:"off",
-				hideSliderAtLimit:0,
-				hideCaptionAtLimit:0,
-				hideAllCaptionAtLilmit:0,
-				debugMode:false,
-				fallbacks: {
-					simplifyAll:"off",
-					nextSlideOnWindowFocus:"off",
-					disableFocusListener:false,
-				}
-			});
-		}
-	});	/*ready*/
+    var tpj = jQuery;
+    var revapi4;
+    tpj(document).ready(function () {
+        if (tpj("#rev_slider_4_1").revolution == undefined) {
+            revslider_showDoubleJqueryError("#rev_slider_4_1");
+        } else {
+            revapi4 = tpj("#rev_slider_4_1").show().revolution({
+                sliderType: "standard",
+                jsFileLocation: "revolution/js/",
+                dottedOverlay: "none",
+                delay: 9000,
+                sliderLayout: "fullscreen",
+                navigation: {
+                    keyboardNavigation: "off",
+                    keyboard_direction: "horizontal",
+                    mouseScrollNavigation: "off",
+                    onHoverStop: "off",
+                    touch: {
+                        touchenabled: "on",
+                        swipe_threshold: 75,
+                        swipe_min_touches: 1,
+                        swipe_direction: "horizontal",
+                        drag_block_vertical: false
+                    }
+                    ,
+                    arrows: {
+                        style: "zeus",
+                        enable: true,
+                        hide_onmobile: true,
+                        hide_under: 600,
+                        hide_onleave: true,
+                        hide_delay: 200,
+                        hide_delay_mobile: 1200,
+                        tmp: '<div class="tp-title-wrap">  	<div class="tp-arr-imgholder"></div> </div>',
+                        left: {
+                            h_align: "left",
+                            v_align: "center",
+                            h_offset: 30,
+                            v_offset: 0
+                        },
+                        right: {
+                            h_align: "right",
+                            v_align: "center",
+                            h_offset: 30,
+                            v_offset: 0
+                        }
+                    }
+                    ,
+                    bullets: {
+                        enable: true,
+                        hide_onmobile: true,
+                        hide_under: 600,
+                        style: "metis",
+                        hide_onleave: true,
+                        hide_delay: 200,
+                        hide_delay_mobile: 1200,
+                        direction: "horizontal",
+                        h_align: "center",
+                        v_align: "bottom",
+                        h_offset: 0,
+                        v_offset: 30,
+                        space: 5,
+                        tmp: '<span class="tp-bullet-img-wrap">  <span class="tp-bullet-image"></span></span><span class="tp-bullet-title">{{title}}</span>'
+                    }
+                },
+                viewPort: {
+                    enable: true,
+                    outof: "pause",
+                    visible_area: "80%"
+                },
+                responsiveLevels: [1240, 1024, 778, 480],
+                gridwidth: [1240, 1024, 778, 480],
+                gridheight: [600, 600, 500, 400],
+                lazyType: "none",
+                parallax: {
+                    type: "mouse",
+                    origo: "slidercenter",
+                    speed: 2000,
+                    levels: [2, 3, 4, 5, 6, 7, 12, 16, 10, 50],
+                },
+                shadow: 0,
+                spinner: "off",
+                stopLoop: "off",
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+                shuffle: "off",
+                autoHeight: "on",
+                hideThumbsOnMobile: "off",
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                debugMode: false,
+                fallbacks: {
+                    simplifyAll: "off",
+                    nextSlideOnWindowFocus: "off",
+                    disableFocusListener: false,
+                }
+            });
+        }
+    });	/*ready*/
 </script>	
 <script type="text/javascript">
-	$(document).ready(function() {
-	
-	"use strict";
+    $(document).ready(function () {
 
-	$(".carousel-client").owlCarousel({
-	autoplay:true,
-	autoplayTimeout:3000,
-	smartSpeed:2000,
-	loop:false,
-	dots:false,
-	nav:true,
-	margin:30,
-	items:5,
-	singleItem:true,
-	responsiveClass:true,
-    responsive:{
-        0:{
-            items:1,
-            nav:true
-        },
-        600:{
-            items:3,
-            nav:true
-        },
-        1000:{
-            items:5,
-            nav:true,
-            loop:false
-        }
-    }
-	});
+        "use strict";
 
-	$(function() {
-		var foo = $('.mini-gallery');
-		foo.poptrox({
-		usePopupCaption: true
-		});
-	});
-	
-	});
+        $(".carousel-client").owlCarousel({
+            autoplay: true,
+            autoplayTimeout: 3000,
+            smartSpeed: 2000,
+            loop: false,
+            dots: false,
+            nav: true,
+            margin: 30,
+            items: 5,
+            singleItem: true,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 3,
+                    nav: true
+                },
+                1000: {
+                    items: 5,
+                    nav: true,
+                    loop: false
+                }
+            }
+        });
+
+        $(function () {
+            var foo = $('.mini-gallery');
+            foo.poptrox({
+                usePopupCaption: true
+            });
+        });
+
+    });
 </script>
 
 </body>
