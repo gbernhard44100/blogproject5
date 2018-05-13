@@ -14,7 +14,7 @@ Class HomeController extends BackController {
     public function executeSendContactForm(HTTPRequest $request) {
         $this->setView('HomePage');
         if (!($request->method() == 'POST'))
-            exit;
+            
         if (!defined("PHP_EOL"))
             define("PHP_EOL", "\r\n");
 
@@ -27,10 +27,12 @@ Class HomeController extends BackController {
         if (trim($name) == '') {
             $ableToSend = FALSE;
             $this->page->addVar('redflash', 'Attention : le formulaire n\'a pas été envoyé! Vous devez entrer votre nom.');
-        } else if (trim($email) == '') {
+        }
+        if (trim($email) == '') {
             $ableToSend = FALSE;
             $this->page->addVar('redflash', 'Attention : le formulaire n\'a pas été envoyé! Il faut entrer une adresse email valide.');
-        } else if (!$this->isEmail($email)) {
+        }
+        if (!$this->isEmail($email)) {
             $ableToSend = FALSE;
             $this->page->addVar('redflash', 'Attention : le formulaire n\'a pas été envoyé! L\'adresse e-mail que vous avez entrée est incorrecte.');
         }

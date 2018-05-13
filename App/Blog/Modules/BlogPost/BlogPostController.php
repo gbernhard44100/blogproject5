@@ -11,7 +11,7 @@ use \App\Blog\Models\CommentForm;
 
 class BlogPostController extends BackController {
 
-    public function executeShowAllBlogPosts(HTTPRequest $request) {
+    public function executeShowAllBlogPosts() {
         $manager = $this->managers->getManagerOf('BlogPost');
         $list = $manager->getList();
         $this->page->addVar('blogPosts', $list);

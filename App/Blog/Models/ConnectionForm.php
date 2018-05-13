@@ -29,7 +29,7 @@ class ConnectionForm extends Form {
         $this->setfields($connection);
     }
 
-    public function setfields(Connection $connection) {
+    public function setfields() {
         $this->addField(new Input(array('label' => 'Nom d\'utilisateur', 'name' => 'username', 'value' => $this->entity()->username(),
             'validators' => [new LengthValidator('Le nom de d\'utilisateur est trop long ou non rempli', 255)]
         )));
