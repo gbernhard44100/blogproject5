@@ -25,7 +25,7 @@ class CommentForm extends Form {
         $this->setfields($comment);
     }
 
-    public function setfields(Comment $comment) {
+    public function setfields() {
         $this->addField(new Input(array('label' => 'Auteur', 'name' => 'author', 'value' => $this->entity()->author(),
             'validators' => array(new LengthValidator('Le nom de l\'auteur est trop long ou non rempli', 255))
         )));

@@ -25,7 +25,7 @@ class BlogPostForm extends Form {
         $this->setfields($blogpost);
     }
 
-    public function setfields(BlogPost $blogpost) {
+    public function setfields() {
         $this->addField(new Input(array('label' => 'Auteur', 'name' => 'author', 'value' => $this->entity()->author(),
             'validators' => [new LengthValidator('Le nom de l\'auteur est trop long ou non rempli', 255)]
         )));
