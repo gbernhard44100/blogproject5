@@ -92,14 +92,14 @@ class ConnectionController extends BackController {
 
         $form = new SubscriptionForm($connection, '/inscription');
         $form->fields()[2]->setValue($request->postData('confirmPassword'));
-
+        $this->setView('ShowSubscriptionPage');
+        
         if (!$form->isValid()) {
             $this->page->addVar('form', $form);
         }
         /* Checking if the password match with the password taped to confirm */ elseif (!($request->postData('password') == $request->postData('confirmPassword'))) {
             $this->page->addVar('form', $form);
             $this->page->addVar('redflash', 'Inscription impossible : les mots de passe ne sont pas identiques.');
-            $this->setView('ShowSubscriptionPage');
         } else {
             /* Checking if the username taped is not already in the database. If it is not we include the subscription in the database. */
             $manager = $this->managers->getManagerOf('connection');
@@ -108,7 +108,6 @@ class ConnectionController extends BackController {
                 $this->page->addVar('form', $form);
                 $this->page->addVar
                         ('redflash', 'Inscription impossible : Nom d\'utilisateur déjà utilisé.');
-                $this->setView('ShowSubscriptionPage');
             } else {
                 /* hashage et salage du mot de passe */
                 $long = strlen($connection->password());
