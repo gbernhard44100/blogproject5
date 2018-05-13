@@ -81,7 +81,7 @@ class ConnectionController extends BackController {
         $this->app()->httpResponse()->redirect('/');
     }
 
-    public function executeShowSubscriptionPage(HTTPRequest $request) {
+    public function executeShowSubscriptionPage() {
         $form = new SubscriptionForm(new Connection, '/inscription');
         $this->page->addVar('form', $form);
     }
@@ -123,7 +123,7 @@ class ConnectionController extends BackController {
         }
     }
 
-    public function executeShowSubscriptions(HTTPRequest $request) {
+    public function executeShowSubscriptions() {
         $manager = $this->managers->getManagerOf('connection');
         $subscriptions = $manager->getList([], -1, -1, 'valid');
         $this->page->addVar('subscriptions', $subscriptions);
