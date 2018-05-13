@@ -40,7 +40,7 @@ abstract class Entity implements \ArrayAccess {
         return isset($this->$var) && is_callable([$this, $var]);
     }
 
-    public function offsetUnset($var) {
+    public function offsetUnset() {
         throw new \Exception('Impossible de supprimer une quelconque valeur');
     }
 
