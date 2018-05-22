@@ -1,0 +1,15 @@
+{
+    "name": "vendor/gaetanbernhardblog",
+    "description": "Description of project gaetanbernhardblog.",
+    "authors": [
+        {
+            "name": "CathyGaetanB",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {
+        "twig/extensions": "dev-master"
+    },
+    "require-dev": {
+    }
+}
