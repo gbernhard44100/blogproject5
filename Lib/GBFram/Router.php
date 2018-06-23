@@ -15,16 +15,16 @@ class Router extends ApplicationComponent {
 
         $routes = $xml->getElementsByTagName('route');
 
-        // On parcourt les routes du fichier XML.
+        
         foreach ($routes as $route) {
             $vars = [];
 
-            // On regarde si des variables sont présentes dans l'URL.
+            
             if ($route->hasAttribute('vars')) {
                 $vars = explode(',', $route->getAttribute('vars'));
             }
 
-            // On ajoute la route au routeur.
+            
             $this->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $vars));
         }
     }
@@ -43,23 +43,22 @@ class Router extends ApplicationComponent {
 
     public function getRoute($url) {
         foreach ($this->routes as $route) {
-            // Si la route correspond à l'URL
+            
             if (($varsValues = $route->match($url)) !== false) {
-                // Si elle a des variables
+                
                 if ($route->hasVars()) {
                     $varsNames = $route->varsNames();
                     $listVars = [];
 
-                    // On crée un nouveau tableau clé/valeur
-                    // (clé = nom de la variable, valeur = sa valeur)
+                    
                     foreach ($varsValues as $key => $match) {
-                        // La première valeur contient entièrement la chaine capturée (voir la doc sur preg_match)
+                        
                         if ($key !== 0) {
                             $listVars[$varsNames[$key - 1]] = $match;
                         }
                     }
 
-                    // On assigne ce tableau de variables � la route
+                    
                     $route->setVars($listVars);
                 }
                 return $route;
