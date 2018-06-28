@@ -2,7 +2,8 @@
 
 namespace Lib\GBFram;
 
-abstract class BackController extends ApplicationComponent {
+abstract class BackController extends ApplicationComponent 
+{
 
     protected $action = '';
     protected $module = '';
@@ -10,7 +11,8 @@ abstract class BackController extends ApplicationComponent {
     protected $view = '';
     protected $managers = null;
 
-    public function __construct(Application $app, $module, $action) {
+    public function __construct(Application $app, $module, $action) 
+    {
         parent::__construct($app);
         $this->setModule($module);
         $this->setAction($action);
@@ -19,7 +21,8 @@ abstract class BackController extends ApplicationComponent {
         $this->managers = new Managers($app, 'PDO', PDOFactory::getMysqlConnexion($app->name()));
     }
 
-    public function execute() {
+    public function execute() 
+    {
         $method = 'execute' . ucfirst($this->action);
         if (!is_callable([$this, $method])) {
             throw new \RuntimeException('L\'action "' . $this->action . '" n\'est pas définie sur ce module');
@@ -28,11 +31,13 @@ abstract class BackController extends ApplicationComponent {
         $this->$method($this->app->httpRequest());
     }
 
-    public function page() {
+    public function page() 
+    {
         return $this->page;
     }
 
-    public function setModule($module) {
+    public function setModule($module) 
+    {
         if (!is_string($module) || empty($module)) {
             throw new \InvalidArgumentException('Le module doit être une chaine de caractères valide');
         }
@@ -40,7 +45,8 @@ abstract class BackController extends ApplicationComponent {
         $this->module = $module;
     }
 
-    public function setAction($action) {
+    public function setAction($action) 
+    {
         if (!is_string($action) || empty($action)) {
             throw new \InvalidArgumentException('L\'action doit être une chaine de caractères valide');
         }
@@ -48,7 +54,8 @@ abstract class BackController extends ApplicationComponent {
         $this->action = $action;
     }
 
-    public function setView($view) {
+    public function setView($view) 
+    {
         if (!is_string($view) || empty($view)) {
             throw new \InvalidArgumentException('La vue doit être une chaine de caractères valide');
         }
