@@ -18,9 +18,11 @@ use \Lib\GBFram\Form\Input;
  *
  * @author CathyGaetanB
  */
-class SubscriptionForm extends Form {
+class SubscriptionForm extends Form 
+{
 
-    public function __construct(Connection $connection, string $target) {
+    public function __construct(Connection $connection, string $target) 
+    {
         parent::__construct(array(
             'name' => 'Connection',
             'entity' => $connection,
@@ -29,7 +31,8 @@ class SubscriptionForm extends Form {
         $this->setfields($connection);
     }
 
-    public function setfields() {
+    public function setfields() 
+    {
         $this->addField(new Input(array('label' => 'Nom d\'utilisateur', 'name' => 'username', 'value' => $this->entity()->username(),
             'validators' => [new LengthValidator('Le nom de d\'utilisateur est trop long ou non rempli', 255)]
         )));
