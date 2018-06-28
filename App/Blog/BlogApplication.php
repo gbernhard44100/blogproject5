@@ -4,9 +4,11 @@ namespace App\Blog;
 
 use Lib\GBFram\Application;
 
-class BlogApplication extends Application {
+class BlogApplication extends Application 
+{
 
-    public function __construct() {
+    public function __construct() 
+    {
         parent::__construct('Blog');
     }
 
