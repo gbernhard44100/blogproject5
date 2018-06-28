@@ -2,11 +2,13 @@
 
 namespace Lib\GBFram;
 
-class ManagerPDO extends Manager {
+class ManagerPDO extends Manager 
+{
 
     protected $table = '';
 
-    function __construct(Application $app, $dao) {
+    function __construct(Application $app, $dao) 
+    {
         parent::__construct($app, $dao);
     }
 
@@ -14,7 +16,8 @@ class ManagerPDO extends Manager {
      * add an entity to the database
      * @param @param Entity $entity
      */
-    public function add($entity) {
+    public function add($entity) 
+    {
         if (!$entity instanceof Entity) {
             throw new \InvalidArgumentException('L\'argument n\'est pas une instance de Entity');
         }
@@ -50,7 +53,8 @@ class ManagerPDO extends Manager {
     /**
      * Return from a database all the entities in a range defined by the input parameters
      */
-    public function getList(array $keys = [], int $offset = -1, int $limit = -1, string $sortingAttribut = 'id', bool $side = FALSE) {
+    public function getList(array $keys = [], int $offset = -1, int $limit = -1, string $sortingAttribut = 'id', bool $side = FALSE) 
+    {
         $finalQuery = 'SELECT * From ' . $this->table;
 
         $specificQuery = ' WHERE 1 ';
@@ -91,7 +95,8 @@ class ManagerPDO extends Manager {
      * Return from the database the BlogPost with a specific id
      * @param Entity $entity
      */
-    public function getUnique($id) {
+    public function getUnique($id) 
+    {
         $request = $this->dao->prepare('SELECT * FROM ' . $this->table . ' WHERE id= :id');
         $request->bindValue(':id', $id, \PDO::PARAM_INT);
         $request->execute();
@@ -105,7 +110,8 @@ class ManagerPDO extends Manager {
      * Modify an Entity in the database 
      * @param @param Entity $entity
      */
-    public function upDate(Entity $entity) {
+    public function upDate(Entity $entity) 
+    {
         if (!$entity instanceof Entity) {
             throw new \InvalidArgumentException('L\'argument n\'est pas une instance de Entity');
         }
@@ -136,7 +142,8 @@ class ManagerPDO extends Manager {
      * Delete an Entity in the database
      * @param Entity $entity
      */
-    public function delete($id) {
+    public function delete($id) 
+    {
         $request = $this->dao->prepare('DELETE FROM ' . $this->table . ' WHERE id= :id');
         $request->bindValue(':id', $id, \PDO::PARAM_INT);
         $request->execute();
