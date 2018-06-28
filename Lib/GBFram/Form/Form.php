@@ -5,7 +5,8 @@ namespace Lib\GBFram\Form;
 use \Lib\GBFram\Entity;
 use Lib\GBFram\Hydrator;
 
-Class Form {
+Class Form 
+{
 
     private $_name;
     private $_entity;
@@ -15,47 +16,58 @@ Class Form {
 
     use Hydrator;
 
-    public function __construct(array $data) {
+    public function __construct(array $data) 
+    {
         $this->hydrate($data);
     }
 
-    public function name() {
+    public function name() 
+    {
         return $this->_name;
     }
 
-    public function fields() {
+    public function fields() 
+    {
         return $this->_fields;
     }
 
-    public function targetUrl() {
+    public function targetUrl() 
+    {
         return $this->_targetUrl;
     }
 
-    public function method() {
+    public function method() 
+    {
         return $this->_method;
     }
 
-    public function entity() {
+    public function entity() 
+    {
         return $this->_entity;
     }
 
-    public function addField(Field $field) {
+    public function addField(Field $field) 
+    {
         $this->_fields[] = $field;
     }
 
-    public function setTargetUrl(string $url) {
+    public function setTargetUrl(string $url) 
+    {
         $this->_targetUrl = $url;
     }
 
-    public function setMethod(string $method) {
+    public function setMethod(string $method) 
+    {
         $this->_method = $method;
     }
 
-    public function setEntity(Entity $entity) {
+    public function setEntity(Entity $entity) 
+    {
         $this->_entity = $entity;
     }
 
-    public function isValid() {
+    public function isValid() 
+    {
         $valid = true;
         // On vérifie que tous les champs sont valides.
         foreach ($this->_fields as $field) {
