@@ -9,15 +9,18 @@ use \App\Blog\Entity\Comment;
 use \App\Blog\Models\BlogPostForm;
 use \App\Blog\Models\CommentForm;
 
-class BlogPostController extends BackController {
+class BlogPostController extends BackController 
+{
 
-    public function executeShowAllBlogPosts() {
+    public function executeShowAllBlogPosts() 
+    {
         $manager = $this->managers->getManagerOf('BlogPost');
         $list = $manager->getList();
         $this->page->addVar('blogPosts', $list);
     }
 
-    public function executeShowBlogPost(HTTPRequest $request) {
+    public function executeShowBlogPost(HTTPRequest $request) 
+    {
         $manager = $this->managers->getManagerOf('BlogPost');
         $blogpost = $manager->getUnique($request->getData('id'));
         $this->page->addVar('blogPost', $blogpost);
@@ -28,14 +31,16 @@ class BlogPostController extends BackController {
         $this->page->addVar('commentForm', $form);
     }
 
-    public function executeShowAdminPage(HTTPRequest $request) {
+    public function executeShowAdminPage(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $manager = $this->managers->getManagerOf('BlogPost');
         $blogposts = $manager->getList();
         $this->page->addVar('blogPosts', $blogposts);
     }
 
-    public function executeShowAddBlogPostPage(HTTPRequest $request) {
+    public function executeShowAddBlogPostPage(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $blogpost = new BlogPost();
         $blogpost->hydrateFromPostRequest($request);
@@ -43,7 +48,8 @@ class BlogPostController extends BackController {
         $this->page->addVar('form', $form);
     }
 
-    public function executeAddBlogPost(HTTPRequest $request) {
+    public function executeAddBlogPost(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $blogpost = new BlogPost();
         $blogpost->hydrateFromPostRequest($request);
@@ -60,7 +66,8 @@ class BlogPostController extends BackController {
         }
     }
 
-    public function executeShowUpdateBlogPostPage(HTTPRequest $request) {
+    public function executeShowUpdateBlogPostPage(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $manager = $this->managers->getManagerOf('BlogPost');
         $blogpost = $manager->getUnique($request->getData('id'));
@@ -68,7 +75,8 @@ class BlogPostController extends BackController {
         $this->page->addVar('form', $form);
     }
 
-    public function executeUpdateBlogPost(HTTPRequest $request) {
+    public function executeUpdateBlogPost(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $blogpost = new BlogPost();
         $blogpost->hydrateFromPostRequest($request);
@@ -86,14 +94,16 @@ class BlogPostController extends BackController {
         }
     }
 
-    public function executeDeleteBlogPost(HTTPRequest $request) {
+    public function executeDeleteBlogPost(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $manager = $this->managers->getManagerOf('BlogPost');
         $manager->delete($request->getData('id'));
         $this->app()->HttpResponse()->redirect('/admin');
     }
 
-    public function executeSubmitComment(HTTPRequest $request) {
+    public function executeSubmitComment(HTTPRequest $request) 
+    {
         $manager = $this->managers->getManagerOf('BlogPost');
         $blogpost = $manager->getUnique($request->getData('id'));
         $this->page->addVar('blogPost', $blogpost);
@@ -113,19 +123,22 @@ class BlogPostController extends BackController {
         }
     }
 
-    public function executeShowComments(HTTPRequest $request) {
+    public function executeShowComments(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $this->executeShowBlogPost($request);
     }
 
-    public function executeDeleteComment(HTTPRequest $request) {
+    public function executeDeleteComment(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $manager = $this->managers->getManagerOf('Comment');
         $manager->delete($request->getData('comment_id'));
         $this->app()->HttpResponse()->redirect('/admin/blogpost/' . $request->getData('id') . '/commentaires');
     }
 
-    public function executeValidateComment(HTTPRequest $request) {
+    public function executeValidateComment(HTTPRequest $request) 
+    {
         $this->testAuthentication($request);
         $manager = $this->managers->getManagerOf('Comment');
         $comment = $manager->getUnique($request->getData('comment_id'));
@@ -134,7 +147,8 @@ class BlogPostController extends BackController {
         $this->app()->HttpResponse()->redirect('/admin/blogpost/' . $request->getData('id') . '/commentaires');
     }
 
-    public function testAuthentication(HTTPRequest $request) {
+    public function testAuthentication(HTTPRequest $request) 
+    {
         /* On vérifie d'abord la validité du ticket */
         if (isset($_COOKIE['tc']) && isset($_SESSION['ticket'])) {
             if (isset($_SESSION['auth']) && $_COOKIE['tc'] == $_SESSION['ticket']) {
