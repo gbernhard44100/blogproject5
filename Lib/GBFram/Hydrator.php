@@ -2,9 +2,11 @@
 
 namespace Lib\GBFram;
 
-trait Hydrator {
+trait Hydrator 
+{
 
-    public function hydrate($data) {
+    public function hydrate($data) 
+    {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
 
