@@ -13,16 +13,19 @@ namespace Lib\GBFram\Form;
  *
  * @author CathyGaetanB
  */
-class LengthValidator extends Validator {
+class LengthValidator extends Validator 
+{
 
     private $_length;
 
-    public function __construct($errorMessage, $length = null) {
+    public function __construct($errorMessage, $length = null) 
+    {
         parent::__construct($errorMessage);
         $this->setLength($length);
     }
 
-    public function isValid($value) {
+    public function isValid($value) 
+    {
         if (isset($this->_length)) {
             return strlen($value) <= $this->_length && $value != '';
         } else {
@@ -30,7 +33,8 @@ class LengthValidator extends Validator {
         }
     }
 
-    public function setLength($length) {
+    public function setLength($length) 
+    {
         $this->_length = $length;
     }
 
