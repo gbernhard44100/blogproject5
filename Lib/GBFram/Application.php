@@ -2,7 +2,8 @@
 
 namespace Lib\GBFram;
 
-abstract class Application {
+abstract class Application 
+{
 
     protected $httpRequest;
     protected $httpResponse;
@@ -10,7 +11,8 @@ abstract class Application {
     protected $name;
     protected $config;
 
-    public function __construct($name) {
+    public function __construct($name) 
+    {
         $this->name = $name;
         $this->httpRequest = new HTTPRequest($this);
         $this->httpResponse = new HTTPResponse($this);
@@ -18,7 +20,8 @@ abstract class Application {
         $this->config = new Config($this);
     }
 
-    public function run() {
+    public function run() 
+    {
         session_start();
         $this->httpRequest->setRoute($this->router->getRoute($this->httpRequest->requestURI()));
 
@@ -32,19 +35,23 @@ abstract class Application {
         $this->httpResponse->send();
     }
 
-    public function httpRequest() {
+    public function httpRequest() 
+    {
         return $this->httpRequest;
     }
 
-    public function httpResponse() {
+    public function httpResponse() 
+    {
         return $this->httpResponse;
     }
 
-    public function name() {
+    public function name() 
+    {
         return $this->name;
     }
 
-    public function config() {
+    public function config() 
+    {
         return $this->config;
     }
 
