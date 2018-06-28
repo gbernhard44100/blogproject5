@@ -14,9 +14,11 @@ use \Lib\GBFram\Form\IntValidator;
 use \Lib\GBFram\Form\TextArea;
 use \Lib\GBFram\Form\Input;
 
-class BlogPostForm extends Form {
+class BlogPostForm extends Form 
+{
 
-    public function __construct(BlogPost $blogpost, string $target) {
+    public function __construct(BlogPost $blogpost, string $target) 
+    {
         parent::__construct(array(
             'name' => 'BlogPost',
             'entity' => $blogpost,
@@ -25,7 +27,8 @@ class BlogPostForm extends Form {
         $this->setfields($blogpost);
     }
 
-    public function setfields() {
+    public function setfields() 
+    {
         $this->addField(new Input(array('label' => 'Auteur', 'name' => 'author', 'value' => $this->entity()->author(),
             'validators' => [new LengthValidator('Le nom de l\'auteur est trop long ou non rempli', 255)]
         )));
