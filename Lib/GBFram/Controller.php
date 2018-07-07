@@ -2,26 +2,24 @@
 
 namespace Lib\GBFram;
 
-abstract class BackController extends ApplicationComponent 
+abstract class Controller extends ApplicationComponent
 {
 
     protected $action = '';
     protected $module = '';
     protected $page = null;
     protected $view = '';
-    protected $managers = null;
+    protected $rm = null;
 
-    public function __construct(Application $app, $module, $action) 
+    public function __construct(Application $app, $module)
     {
         parent::__construct($app);
         $this->setModule($module);
-        $this->setAction($action);
         $this->page = new Page($app, $module);
-        $this->setView($action);
-        $this->managers = new Managers($app, 'PDO', PDOFactory::getMysqlConnexion($app->name()));
+        $this->rm = new RepositoriesManager($app);
     }
 
-    public function execute() 
+    public function execute()
     {
         $method = 'execute' . ucfirst($this->action);
         if (!is_callable([$this, $method])) {
@@ -31,12 +29,12 @@ abstract class BackController extends ApplicationComponent
         $this->$method($this->app->httpRequest());
     }
 
-    public function page() 
+    public function page()
     {
         return $this->page;
     }
 
-    public function setModule($module) 
+    public function setModule($module)
     {
         if (!is_string($module) || empty($module)) {
             throw new \InvalidArgumentException('Le module doit être une chaine de caractères valide');
@@ -45,7 +43,7 @@ abstract class BackController extends ApplicationComponent
         $this->module = $module;
     }
 
-    public function setAction($action) 
+    public function setAction($action)
     {
         if (!is_string($action) || empty($action)) {
             throw new \InvalidArgumentException('L\'action doit être une chaine de caractères valide');
@@ -54,7 +52,7 @@ abstract class BackController extends ApplicationComponent
         $this->action = $action;
     }
 
-    public function setView($view) 
+    public function setView($view)
     {
         if (!is_string($view) || empty($view)) {
             throw new \InvalidArgumentException('La vue doit être une chaine de caractères valide');

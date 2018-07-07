@@ -2,24 +2,24 @@
 
 namespace Lib\GBFram;
 
-class ManagerPDO extends Manager 
+class RepositoryPDO extends Repository
 {
 
     protected $table = '';
 
-    function __construct(Application $app, $dao) 
+    function __construct(Application $app)
     {
-        parent::__construct($app, $dao);
+        parent::__construct($app, PDOFactory::getMysqlConnexion($app->name()));
     }
 
-    /**
-     * add an entity to the database
-     * @param @param Entity $entity
-     */
-    public function add($entity) 
+    public function add($entity)
     {
         if (!$entity instanceof Entity) {
             throw new \InvalidArgumentException('L\'argument n\'est pas une instance de Entity');
+        }
+
+        if (static::class != $entity->getRepository()) {
+            throw new \InvalidArgumentException('L\'entité en argument ne peut pas être manipuler par ce repository');
         }
 
         $query1 = 'INSERT INTO ' . $this->table . '(';
@@ -27,13 +27,9 @@ class ManagerPDO extends Manager
 
         $reflect = new \ReflectionClass($entity);
         foreach ($reflect->getProperties() as $attribut) {
-            if (!in_array($attribut->name, array('id', '_id', 'erreurs'))) {
+            if (!in_array($attribut->name, array('id', 'repository', 'erreurs'))) {
                 $attribut->setAccessible(true);
-                if ($attribut->isPrivate()) {
-                    $query1 .= substr($attribut->name . ',', 1);
-                } else {
-                    $query1 .= $attribut->name . ', ';
-                }
+                $query1 .= $attribut->name . ', ';
                 $query2 .= '?,';
                 if (is_bool($attribut->getValue($entity))) {
                     $values[] = (int) $attribut->getValue($entity);
@@ -53,7 +49,7 @@ class ManagerPDO extends Manager
     /**
      * Return from a database all the entities in a range defined by the input parameters
      */
-    public function getList(array $keys = [], int $offset = -1, int $limit = -1, string $sortingAttribut = 'id', bool $side = FALSE) 
+    public function getList(array $keys = [], int $offset = -1, int $limit = -1, string $sortingAttribut = 'id', bool $side = FALSE)
     {
         $finalQuery = 'SELECT * From ' . $this->table;
 
@@ -91,11 +87,7 @@ class ManagerPDO extends Manager
         return $entities;
     }
 
-    /**
-     * Return from the database the BlogPost with a specific id
-     * @param Entity $entity
-     */
-    public function getUnique($id) 
+    public function getUnique($id)
     {
         $request = $this->dao->prepare('SELECT * FROM ' . $this->table . ' WHERE id= :id');
         $request->bindValue(':id', $id, \PDO::PARAM_INT);
@@ -106,14 +98,14 @@ class ManagerPDO extends Manager
         return $theEntity;
     }
 
-    /**
-     * Modify an Entity in the database 
-     * @param @param Entity $entity
-     */
-    public function upDate(Entity $entity) 
+    public function upDate(Entity $entity)
     {
         if (!$entity instanceof Entity) {
             throw new \InvalidArgumentException('L\'argument n\'est pas une instance de Entity');
+        }
+
+        if (static::class != $entity->getRepository()) {
+            throw new \InvalidArgumentException('L\'entité en argument ne peut pas être manipuler par ce repository');
         }
 
         $query1 = 'UPDATE ' . $this->table . ' SET ';
@@ -121,7 +113,7 @@ class ManagerPDO extends Manager
 
         $reflect = new \ReflectionClass($entity);
         foreach ($reflect->getProperties() as $attribut) {
-            if (!in_array($attribut->name, array('id', '_id', 'erreurs'))) {
+            if (!in_array($attribut->name, array('id', 'repository', 'erreurs'))) {
                 $attribut->setAccessible(true);
                 $query1 .= $attribut->name . ' = ?, ';
                 if (is_bool($attribut->getValue($entity))) {
@@ -138,11 +130,7 @@ class ManagerPDO extends Manager
         $request->execute($values);
     }
 
-    /**
-     * Delete an Entity in the database
-     * @param Entity $entity
-     */
-    public function delete($id) 
+    public function delete($id)
     {
         $request = $this->dao->prepare('DELETE FROM ' . $this->table . ' WHERE id= :id');
         $request->bindValue(':id', $id, \PDO::PARAM_INT);

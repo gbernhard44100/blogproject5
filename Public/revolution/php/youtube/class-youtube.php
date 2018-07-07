@@ -9,7 +9,8 @@
  * @subpackage socialstreams/youtube
  * @author     ThemePunch <info@themepunch.com>
  */
-class TP_youtube {
+class TP_youtube
+{
 
     /**
      * API key
@@ -35,7 +36,8 @@ class TP_youtube {
      * @since    1.0.0
      * @param      string    $api_key	Youtube API key.
      */
-    public function __construct($api_key, $channel_id) {
+    public function __construct($api_key, $channel_id)
+    {
         $this->api_key = $api_key;
         $this->channel_id = $channel_id;
     }
@@ -45,7 +47,8 @@ class TP_youtube {
      *
      * @since    1.0.0
      */
-    public function get_playlists() {
+    public function get_playlists()
+    {
         //call the API and decode the response
         $url = "https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=" . $this->channel_id . "&key=" . $this->api_key;
         $rsp = json_decode(file_get_contents($url));
@@ -59,7 +62,8 @@ class TP_youtube {
      * @param    string    $playlist_id 	Youtube Playlist ID
      * @param    integer    $count 	Max videos count
      */
-    public function show_playlist_videos($playlist_id, $count = 50) {
+    public function show_playlist_videos($playlist_id, $count = 50)
+    {
         //call the API and decode the response
         $url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" . $playlist_id . "&maxResults=" . $count . "&fields=items%2Fsnippet&key=" . $this->api_key;
         $rsp = json_decode(file_get_contents($url));
@@ -72,7 +76,8 @@ class TP_youtube {
      * @since    1.0.0
      * @param    integer    $count 	Max videos count
      */
-    public function show_channel_videos($count = 50) {
+    public function show_channel_videos($count = 50)
+    {
         //call the API and decode the response
         $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=" . $this->channel_id . "&maxResults=" . $count . "&key=" . $this->api_key . "&order=date";
         echo $url;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <controller module="BlogPost" class="App\Blog\Modules\BlogPost\BlogPostController"></controller>
+    <controller module="Home" class="App\Blog\Modules\Home\HomeController"></controller>
+    <controller module="User" class="App\Blog\Modules\User\UserController"></controller>
+    
+    <repository name="BlogPost" class="App\Blog\Models\BlogPostRepositoryPDO"></repository>
+    <repository name="Comment" class="App\Blog\Models\CommentRepositoryPDO"></repository>
+    <repository name="User" class="App\Blog\Models\UserRepositoryPDO"></repository>
+</config>

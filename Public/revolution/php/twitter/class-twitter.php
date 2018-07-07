@@ -11,7 +11,8 @@ include 'RestApi.php';
  * @subpackage socialstreams/twitter
  * @author     ThemePunch <info@themepunch.com>
  */
-class TP_twitter {
+class TP_twitter
+{
 
     /**
      * Consumer Key
@@ -55,7 +56,8 @@ class TP_twitter {
      * @since    1.0.0
      * @param      string    $api_key flickr API key.
      */
-    public function __construct($consumer_key, $consumer_secret, $access_token, $access_token_secret) {
+    public function __construct($consumer_key, $consumer_secret, $access_token, $access_token_secret)
+    {
         $this->consumer_key = $consumer_key;
         $this->consumer_secret = $consumer_secret;
         $this->access_token = $access_token;
@@ -68,7 +70,8 @@ class TP_twitter {
      * @since    1.0.0
      * @param    string    $twitter_account   Twitter account without trailing @ char
      */
-    public function get_public_photos($twitter_account) {
+    public function get_public_photos($twitter_account)
+    {
         $twitter = new \TwitterPhp\RestApi($this->consumer_key, $this->consumer_secret, $this->access_token, $this->access_token_secret);
         /*
          * Connect as application
@@ -92,7 +95,8 @@ class TP_twitter {
      * @param    string    $key   Needle
      * @param    array     $form  Haystack
      */
-    public static function array_find_element_by_key($key, $form) {
+    public static function array_find_element_by_key($key, $form)
+    {
         if (array_key_exists($key, $form)) {
             $ret = & $form[$key];
             return $ret;
@@ -114,7 +118,8 @@ class TP_twitter {
      * @since    1.0.0
      * @param    string    $tweets  Twitter Output Data
      */
-    public static function makeClickableLinks($s) {
+    public static function makeClickableLinks($s)
+    {
         return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $s);
     }
 

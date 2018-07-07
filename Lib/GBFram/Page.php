@@ -5,7 +5,7 @@ namespace Lib\GBFram;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class Page extends ApplicationComponent 
+class Page extends ApplicationComponent
 {
 
     protected $contentFile;
@@ -13,7 +13,7 @@ class Page extends ApplicationComponent
     protected $twig;
     protected $twigTemplatesPath = array();
 
-    function __construct(Application $app) 
+    function __construct(Application $app)
     {
         parent::__construct($app);
 
@@ -34,7 +34,7 @@ class Page extends ApplicationComponent
         $this->twig->addGlobal('session', $_SESSION);
     }
 
-    public function addVar($var, $value) 
+    public function addVar($var, $value)
     {
         if (!is_string($var) || is_numeric($var) || empty($var)) {
             throw new \InvalidArgumentException('Le nom de la variable doit être une chaine de caractères non nulle');
@@ -42,7 +42,7 @@ class Page extends ApplicationComponent
         $this->vars[$var] = $value;
     }
 
-    public function getGeneratedPage() 
+    public function getGeneratedPage()
     {
         $fileExist = False;
         foreach ($this->twigTemplatesPath as $path) {
@@ -56,7 +56,7 @@ class Page extends ApplicationComponent
         $this->twig->display($this->contentFile, $this->vars);
     }
 
-    public function setContentFile($contentFile) 
+    public function setContentFile($contentFile)
     {
         if (!is_string($contentFile) || empty($contentFile)) {
             throw new \InvalidArgumentException('La vue spécifiée est invalide');

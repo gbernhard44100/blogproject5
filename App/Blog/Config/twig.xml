@@ -5,6 +5,6 @@
     <define path="Errors"></define>
     <define path="App/Blog/Templates"></define>
     <define path="App/Blog/Modules/BlogPost/Views"></define>
-    <define path="App/Blog/Modules/Connection/Views"></define>
+    <define path="App/Blog/Modules/User/Views"></define>
     <define path="App/Blog/Modules/Home/Views"></define>
 </definitions>

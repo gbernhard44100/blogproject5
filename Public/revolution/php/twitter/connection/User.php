@@ -2,7 +2,8 @@
 
 namespace TwitterPhp\Connection;
 
-class User extends Base {
+class User extends Base
+{
 
     /**
      * @var string
@@ -30,7 +31,8 @@ class User extends Base {
      * @param string $accessToken
      * @param string $accessTokenSecret
      */
-    public function __construct($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret) {
+    public function __construct($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret)
+    {
         $this->_consumerKey = $consumerKey;
         $this->_consumerSecret = $consumerSecret;
         $this->_accessToken = $accessToken;
@@ -43,7 +45,8 @@ class User extends Base {
      * @param $method
      * @return array
      */
-    protected function _buildHeaders($url, array $parameters = null, $method) {
+    protected function _buildHeaders($url, array $parameters = null, $method)
+    {
         $oauthHeaders = array(
             'oauth_version' => '1.0',
             'oauth_consumer_key' => $this->_consumerKey,
@@ -75,7 +78,8 @@ class User extends Base {
      * @param $method
      * @return string
      */
-    private function _buildOauthSignature($url, array $params, $method) {
+    private function _buildOauthSignature($url, array $params, $method)
+    {
         ksort($params);
         $sortedParams = array();
 

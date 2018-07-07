@@ -1,37 +1,22 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\Blog\Models;
 
-use App\Blog\Entity\Connection;
+use App\Blog\Entity\User;
 use Lib\GBFram\Form\Form;
 use \Lib\GBFram\Form\LengthValidator;
 use \Lib\GBFram\Form\Input;
 
-/**
- * Description of ConnectionForm
- *
- * @author CathyGaetanB
- */
-class SubscriptionForm extends Form 
+class SubscriptionForm extends Form
 {
 
-    public function __construct(Connection $connection, string $target) 
+    public function __construct(User $user, string $target, $request = null)
     {
-        parent::__construct(array(
-            'name' => 'Connection',
-            'entity' => $connection,
-            'targetUrl' => $target,
-        ));
-        $this->setfields($connection);
+        parent::__construct('Subscription', $user, $target, $request);
+        $this->setfields();
     }
 
-    public function setfields() 
+    public function setfields()
     {
         $this->addField(new Input(array('label' => 'Nom d\'utilisateur', 'name' => 'username', 'value' => $this->entity()->username(),
             'validators' => [new LengthValidator('Le nom de d\'utilisateur est trop long ou non rempli', 255)]

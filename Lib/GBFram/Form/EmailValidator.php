@@ -1,27 +1,16 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace Lib\GBFram\Form;
 
-/**
- * Description of EmailValidator
- *
- * @author CathyGaetanB
- */
-class EmailValidator extends Validator 
+class EmailValidator extends Validator
 {
 
-    function __construct($errorMessage) 
+    function __construct($errorMessage)
     {
         parent::__construct($errorMessage);
     }
 
-    public function isValid($value) 
+    public function isValid($value)
     {
         return(preg_match("/^[-_.[:alnum:]]+@((([[:alnum:]]|[[:alnum:]][[:alnum:]-]*[[:alnum:]])\.)+(ad|ae|aero|af|ag|ai|al|am|an|ao|aq|ar|arpa|as|at|au|"
                         . "aw|az|ba|bb|bd|be|bf|bg|bh|bi|biz|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|com|coop|cr|cs|cu|cv|cx|cy|cz|"

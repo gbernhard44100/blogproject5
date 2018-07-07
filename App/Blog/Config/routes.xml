@@ -10,11 +10,11 @@
     <route url="/blogpost/([0-9]+)" module="BlogPost" action="ShowBlogPost" vars="id"></route>
     <route url="/blogpost/([0-9]+)/submitcomment" module="BlogPost" action="SubmitComment" vars="id"></route>
     
-    <route url="(.*)/demandeconnexion" module="Connection" action="ShowConnectionPage" vars="adresse"></route>
-    <route url="(.*)/seconnecter" module="Connection" action="Authentication" vars="adresse"></route>
-    <route url="/sedeconnecter" module="Connection" action="Disconnection" ></route>
-    <route url="/demandeinscription" module="Connection" action="ShowSubscriptionPage" ></route>
-    <route url="/inscription" module="Connection" action="SubmitSubscription" ></route>     
+    <route url="(.*)/demandeconnexion" module="User" action="ShowLoginPage" vars="adresse"></route>
+    <route url="(.*)/seconnecter" module="User" action="Authentication" vars="adresse"></route>
+    <route url="/sedeconnecter" module="User" action="Disconnection" ></route>
+    <route url="/demandeinscription" module="User" action="ShowSubscriptionPage" ></route>
+    <route url="/inscription" module="User" action="SubmitSubscription" ></route>     
                 
     <route url="/admin" module="BlogPost" action="ShowAdminPage"></route>    
     <route url="/admin/pageajoutblogPost" module="BlogPost" action="ShowAddBlogPostPage" ></route>
@@ -27,8 +27,8 @@
     <route url="/admin/blogpost/([0-9]+)/commentaire/([0-9]+)/supprimer" module="BlogPost" action="DeleteComment" vars="id,comment_id" ></route>
     <route url="/admin/blogpost/([0-9]+)/commentaire/([0-9]+)/valider" module="BlogPost" action="ValidateComment" vars="id,comment_id" ></route>
     
-    <route url="/admin/inscriptions" module="Connection" action="ShowSubscriptions" ></route>
-    <route url="/admin/inscription/([0-9]+)/valider" module="Connection" action="ValidateSubscription" vars="id"></route>
+    <route url="/admin/inscriptions" module="User" action="ShowSubscriptions" ></route>
+    <route url="/admin/inscription/([0-9]+)/valider" module="User" action="ValidateSubscription" vars="id"></route>
     
     
 </routes>

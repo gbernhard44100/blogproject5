@@ -10,24 +10,19 @@ namespace App\Blog\Models;
 use App\Blog\Entity\Comment;
 use Lib\GBFram\Form\Form;
 use \Lib\GBFram\Form\LengthValidator;
-use \Lib\GBFram\Form\IntValidator;
 use \Lib\GBFram\Form\TextArea;
 use \Lib\GBFram\Form\Input;
 
-class CommentForm extends Form 
+class CommentForm extends Form
 {
 
-    public function __construct(Comment $comment, string $target) 
+    public function __construct(Comment $comment, string $target, $request = null)
     {
-        parent::__construct(array(
-            'name' => 'Comment',
-            'entity' => $comment,
-            'targetUrl' => $target,
-        ));
-        $this->setfields($comment);
+        parent::__construct('Comment', $comment, $target, $request);
+        $this->setfields();
     }
 
-    public function setfields() 
+    public function setfields()
     {
         $this->addField(new Input(array('label' => 'Auteur', 'name' => 'author', 'value' => $this->entity()->author(),
             'validators' => array(new LengthValidator('Le nom de l\'auteur est trop long ou non rempli', 255))

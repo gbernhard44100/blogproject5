@@ -7,7 +7,8 @@ namespace TwitterPhp\Connection;
  * @package TwitterPhp
  * @subpackage Connection
  */
-abstract class Base {
+abstract class Base
+{
 
     /**
      * Url for Twitter api
@@ -56,7 +57,8 @@ abstract class Base {
      * @param array $parameters
      * @return mixed
      */
-    public function get($resource, array $parameters = array()) {
+    public function get($resource, array $parameters = array())
+    {
         $url = $this->_prepareUrl($resource);
         $headers = $this->_buildHeaders($url, $parameters, self::METHOD_GET);
         $url = $url . '?' . http_build_query($parameters);
@@ -77,7 +79,8 @@ abstract class Base {
      * @param array $parameters
      * @return mixed
      */
-    public function post($resource, array $parameters = array()) {
+    public function post($resource, array $parameters = array())
+    {
         $url = $this->_prepareUrl($resource);
         $headers = $this->_buildHeaders($url, $parameters, self::METHOD_POST);
         $curlParams = array(
@@ -96,7 +99,8 @@ abstract class Base {
      * @param array $params
      * @return array
      */
-    protected function _callApi(array $params) {
+    protected function _callApi(array $params)
+    {
         $curl = curl_init();
         curl_setopt_array($curl, $params);
         curl_setopt($curl, CURLOPT_HEADER, 0);
@@ -110,7 +114,8 @@ abstract class Base {
      * @param string $resource
      * @return string
      */
-    private function _prepareUrl($resource) {
+    private function _prepareUrl($resource)
+    {
         return self::TWITTER_API_URL . '/' . self::TWITTER_API_VERSION . '/' . ltrim($resource, '/') . '.json';
     }
 

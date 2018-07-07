@@ -2,36 +2,36 @@
 
 namespace Lib\GBFram\Form;
 
-class TextArea extends Field 
+class TextArea extends Field
 {
 
-    Private $_rows = "10";
-    Private $_cols = "80";
+    Private $rows = "10";
+    Private $cols = "80";
 
-    function __construct(array $data) 
+    function __construct(array $data)
     {
         parent::__construct($data);
         $this->fieldType = 'TextArea';
     }
 
-    public function rows() 
+    public function rows()
     {
-        return $this->_rows;
+        return $this->rows;
     }
 
-    public function cols() 
+    public function cols()
     {
-        return $this->_cols;
+        return $this->cols;
     }
 
-    public function setRows(int $rows) 
+    public function setRows(int $rows)
     {
-        $this->_rows = $rows;
+        $this->rows = $rows;
     }
 
-    public function setCols(int $cols) 
+    public function setCols(int $cols)
     {
-        $this->_cols = $cols;
+        $this->cols = $cols;
     }
 
 }

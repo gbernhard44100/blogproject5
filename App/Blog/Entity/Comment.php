@@ -4,7 +4,7 @@ namespace App\Blog\Entity;
 
 use \Lib\GBFram\Entity;
 
-class Comment extends Entity 
+class Comment extends Entity
 {
 
     protected $id;
@@ -14,32 +14,37 @@ class Comment extends Entity
     protected $updateDate;
     protected $idBlog;
 
-    public function id() 
+    public function __construct()
+    {
+        $this->repository = 'App\Blog\Models\CommentRepositoryPDO';
+    }
+
+    public function id()
     {
         return $this->id;
     }
 
-    public function author() 
+    public function author()
     {
         return $this->author;
     }
 
-    public function content() 
+    public function content()
     {
         return $this->content;
     }
 
-    public function valid() 
+    public function valid()
     {
         return $this->valid;
     }
 
-    public function updateDate() 
+    public function updateDate()
     {
         return $this->updateDate;
     }
 
-    public function idBlog() 
+    public function idBlog()
     {
         return $this->idBlog;
     }
@@ -51,27 +56,27 @@ class Comment extends Entity
         }
     }
 
-    public function setValid() 
+    public function setValid()
     {
         $this->valid = TRUE;
     }
 
-    public function setAuthor(string $author) 
+    public function setAuthor(string $author)
     {
         $this->author = $author;
     }
 
-    public function setContent(string $content) 
+    public function setContent(string $content)
     {
         $this->content = $content;
     }
 
-    public function setUpdateDate($updateDate) 
+    public function setUpdateDate($updateDate)
     {
         $this->updateDate = $updateDate;
     }
 
-    public function setIdBlog(int $id) 
+    public function setIdBlog(int $id)
     {
         if ($id > 0) {
             $this->idBlog = $id;

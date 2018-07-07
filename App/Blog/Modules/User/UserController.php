@@ -1,54 +1,41 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace App\Blog\Modules\User;
 
-namespace App\Blog\Modules\Connection;
-
-use \Lib\GBFram\BackController;
-use \App\Blog\Models\ConnectionForm;
-use \App\Blog\Entity\Connection;
+use \Lib\GBFram\Controller;
+use \App\Blog\Models\LoginForm;
+use \App\Blog\Entity\User;
 use \Lib\GBFram\HTTPRequest;
 use \App\Blog\Models\SubscriptionForm;
 
-/**
- * Description of ConnectionController
- *
- * @author CathyGaetanB
- */
-class ConnectionController extends BackController 
+class UserController extends Controller
 {
 
-    public function executeShowConnectionPage(HTTPRequest $request) 
+    public function executeShowLoginPage(HTTPRequest $request)
     {
-        $form = new ConnectionForm(new Connection, implode('', [explode('demandeconnexion', $request->requestURI())[0], 'seconnecter']));
+        $form = new LoginForm(new User, implode('', [explode('demandeconnexion', $request->requestURI())[0], 'seconnecter']));
         $this->page->addVar('form', $form);
     }
 
-    public function executeAuthentication(HTTPRequest $request) 
+    public function executeAuthentication(HTTPRequest $request)
     {
-        $connection = new Connection();
-        $connection->hydrateFromPostRequest($request);
-        $form = new ConnectionForm($connection, $request->requestURI());
-
+        $user = new User();
+        $form = new LoginForm($user, $request->requestURI(), $request);
         if (!$form->isValid()) {
             $this->page->addVar('form', $form);
-            $this->setView('ShowConnectionPage');
+            $this->setView('ShowLoginPage');
         } else {
             /* hashage et salage du mot de passe */
-            $long = strlen($connection->password());
-            $password = "&=@+" . $long . $connection->password() . "#1%";
+            $long = strlen($user->password());
+            $password = "&=@+" . $long . $user->password() . "#1%";
             $password = hash('sha512', $password);
-            $connection->setPassword($password);
-            $manager = $this->managers->getManagerOf('Connection');
-            $matchedConnection = $manager->getList([
+            $user->setPassword($password);
+            $manager = $this->rm->getManagerOf('User');
+            $matchedUser = $manager->getList([
                 'username' => $request->postData('username'),
-                'password' => $connection->password(),]);
-            if (!empty($matchedConnection)) {
-                if ($matchedConnection[0]->valid() == TRUE) {
+                'password' => $user->password(),]);
+            if (!empty($matchedUser)) {
+                if ($matchedUser[0]->valid() == TRUE) {
                     session_start();
                     $ticket = session_id() . microtime() . rand(0, 99999);
                     $ticket = hash('sha512', $ticket);
@@ -65,17 +52,17 @@ class ConnectionController extends BackController
                 } else {
                     $this->page->addVar('redflash', 'Connection impossible : Votre inscription n\'a pas encore été validé par l\'administrateur');
                     $this->page->addVar('form', $form);
-                    $this->setView('ShowConnectionPage');
+                    $this->setView('ShowLoginPage');
                 }
             } else {
                 $this->page->addVar('redflash', 'Le pseudo ou le mot de passe est incorrect.');
                 $this->page->addVar('form', $form);
-                $this->setView('ShowConnectionPage');
+                $this->setView('ShowLoginPage');
             }
         }
     }
 
-    public function executeDisconnection() 
+    public function executeDisconnection()
     {
         setcookie('tc', '', time() - 3600, '/', 'www.bernharddesign.com', false, true);
         $_SESSION = array();
@@ -83,43 +70,42 @@ class ConnectionController extends BackController
         $this->app()->httpResponse()->redirect('/');
     }
 
-    public function executeShowSubscriptionPage() 
+    public function executeShowSubscriptionPage()
     {
-        $form = new SubscriptionForm(new Connection, '/inscription');
+        $form = new SubscriptionForm(new User, '/inscription');
         $this->page->addVar('form', $form);
     }
 
-    public function executeSubmitSubscription(HTTPRequest $request) 
+    public function executeSubmitSubscription(HTTPRequest $request)
     {
-        $connection = new Connection();
-        $connection->hydrateFromPostRequest($request);
+        $user = new User();
 
-        $form = new SubscriptionForm($connection, '/inscription');
+        $form = new SubscriptionForm($user, '/inscription', $request);
         $form->fields()[2]->setValue($request->postData('confirmPassword'));
         $this->setView('ShowSubscriptionPage');
-        
+
         if (!$form->isValid()) {
             $this->page->addVar('form', $form);
-        /* Checking if the password match with the password taped to confirm */ 
+            /* Checking if the password match with the password taped to confirm */
         } elseif (!($request->postData('password') == $request->postData('confirmPassword'))) {
             $this->page->addVar('form', $form);
             $this->page->addVar('redflash', 'Inscription impossible : les mots de passe ne sont pas identiques.');
         } else {
             /* Checking if the username taped is not already in the database. If it is not we include the subscription in the database. */
-            $manager = $this->managers->getManagerOf('connection');
-            $matchUser = $manager->getList(['username' => $connection->username()]);
+            $manager = $this->rm->getManagerOf('User');
+            $matchUser = $manager->getList(['username' => $user->username()]);
             if (!empty($matchUser)) {
                 $this->page->addVar('form', $form);
                 $this->page->addVar
                         ('redflash', 'Inscription impossible : Nom d\'utilisateur déjà utilisé.');
             } else {
                 /* hashage et salage du mot de passe */
-                $long = strlen($connection->password());
-                $password = "&=@+" . $long . $connection->password() . "#1%";
+                $long = strlen($user->password());
+                $password = "&=@+" . $long . $user->password() . "#1%";
                 $password = hash('sha512', $password);
-                $connection->setPassword($password);
+                $user->setPassword($password);
 
-                $manager->add($connection);
+                $manager->add($user);
                 $this->page->addVar('yellowflash', 'Votre demande d\'inscritption à bien été prise en compte.'
                         . ' Une fois celle-ci validé, vous pourrez vous connecter.');
                 $this->setView('HomePage');
@@ -127,16 +113,16 @@ class ConnectionController extends BackController
         }
     }
 
-    public function executeShowSubscriptions() 
+    public function executeShowSubscriptions()
     {
-        $manager = $this->managers->getManagerOf('connection');
+        $manager = $this->rm->getManagerOf('User');
         $subscriptions = $manager->getList([], -1, -1, 'valid');
         $this->page->addVar('subscriptions', $subscriptions);
     }
 
-    public function executeValidateSubscription(HTTPRequest $request) 
+    public function executeValidateSubscription(HTTPRequest $request)
     {
-        $manager = $this->managers->getManagerOf('connection');
+        $manager = $this->rm->getManagerOf('User');
         $subscription = $manager->getUnique($request->getData('id'));
         $subscription->setValid();
         $manager->upDate($subscription);

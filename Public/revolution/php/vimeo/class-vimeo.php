@@ -9,7 +9,8 @@
  * @subpackage socialstreams/vimeo
  * @author     ThemePunch <info@themepunch.com>
  */
-class TP_vimeo {
+class TP_vimeo
+{
 
     /**
      * Stream Array
@@ -25,7 +26,8 @@ class TP_vimeo {
      *
      * @since    1.0.0
      */
-    public function get_vimeo_videos($type, $value) {
+    public function get_vimeo_videos($type, $value)
+    {
         //call the API and decode the response
         if ($type == "user") {
             $url = "https://vimeo.com/api/v2/" . $value . "/videos.json";
@@ -44,7 +46,8 @@ class TP_vimeo {
      * @since    1.0.0
      * @param    string    $videos 	Vimeo Output Data
      */
-    private function vimeo_output_array($videos, $count) {
+    private function vimeo_output_array($videos, $count)
+    {
         foreach ($videos as $video) {
             if ($count-- == 0)
                 break;

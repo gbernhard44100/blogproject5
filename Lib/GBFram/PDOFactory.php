@@ -2,9 +2,10 @@
 
 namespace Lib\GBFram;
 
-class PDOFactory {
+class PDOFactory
+{
 
-    public static function getMysqlConnexion($appName) 
+    public static function getMysqlConnexion($appName)
     {
         $xml = new \DOMDocument;
         $xml->load(__DIR__ . '/../../App//' . $appName . '/Config/mysqlconnection.xml');

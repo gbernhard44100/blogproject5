@@ -2,7 +2,6 @@
 
 namespace App\Blog\Entity;
 
-use Lib\GBFram\Hydrator;
 use \Lib\GBFram\Entity;
 
 class BlogPost extends Entity
@@ -13,6 +12,11 @@ class BlogPost extends Entity
     protected $title;
     protected $content;
     protected $updateDate;
+
+    public function __construct()
+    {
+        $this->repository = 'App\Blog\Models\BlogPostRepositoryPDO';
+    }
 
     public function id()
     {

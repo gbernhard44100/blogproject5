@@ -2,80 +2,101 @@
 
 namespace Lib\GBFram\Form;
 
-use \Lib\GBFram\Entity;
-use Lib\GBFram\Hydrator;
+use Lib\GBFram\HTTPRequest;
 
-Class Form 
+Class Form
 {
 
-    private $_name;
-    private $_entity;
-    private $_targetUrl;
-    private $_method = 'post';
-    private $_fields = array();
+    private $name;
+    private $entity;
+    private $targetUrl;
+    private $method = 'post';
+    private $fields = array();
 
-    use Hydrator;
-
-    public function __construct(array $data) 
+    public function __construct($name, $entity, $target, HTTPRequest $request = null)
     {
-        $this->hydrate($data);
+        $this->setName($name);
+        $this->setEntity($entity);
+        $this->setTargetUrl($target);
+        if (!is_null($request)) {
+            $this->hydrateFromPostRequest($request);
+        }
     }
 
-    public function name() 
+    public function name()
     {
-        return $this->_name;
+        return $this->name;
     }
 
-    public function fields() 
+    public function fields()
     {
-        return $this->_fields;
+        return $this->fields;
     }
 
-    public function targetUrl() 
+    public function targetUrl()
     {
-        return $this->_targetUrl;
+        return $this->targetUrl;
     }
 
-    public function method() 
+    public function method()
     {
-        return $this->_method;
+        return $this->method;
     }
 
-    public function entity() 
+    public function entity()
     {
-        return $this->_entity;
+        return $this->entity;
     }
 
-    public function addField(Field $field) 
+    public function addField(Field $field)
     {
-        $this->_fields[] = $field;
+        $this->fields[] = $field;
     }
 
-    public function setTargetUrl(string $url) 
+    public function setName(string $name)
     {
-        $this->_targetUrl = $url;
+        $this->name = $name;
     }
 
-    public function setMethod(string $method) 
+    public function setTargetUrl(string $url)
     {
-        $this->_method = $method;
+        $this->targetUrl = $url;
     }
 
-    public function setEntity(Entity $entity) 
+    public function setMethod(string $method)
     {
-        $this->_entity = $entity;
+        $this->method = $method;
     }
 
-    public function isValid() 
+    public function setEntity($entity)
+    {
+        $this->entity = $entity;
+    }
+
+    public function isValid()
     {
         $valid = true;
-        // On vérifie que tous les champs sont valides.
-        foreach ($this->_fields as $field) {
+
+        foreach ($this->fields as $field) {
             if (!$field->isValid()) {
                 $valid = false;
             }
         }
         return $valid;
+    }
+
+    public function hydrateFromPostRequest(HTTPRequest $request)
+    {
+        if (!$request->method() == 'POST') {
+            throw new \Exception('Il ne s\'agit pas d\'une requête POST');
+        }
+        $object = new \ReflectionObject($this->entity);
+        foreach ($object->getProperties() as $attribut) {
+            $method = 'set' . ucfirst($attribut->getName());
+            if (is_callable([$this->entity, $method]) && $request->postData($attribut->getName())) {
+                $this->entity->$method($request->postData($attribut->getName()));
+            }
+        }
     }
 
 }
