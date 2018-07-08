@@ -50,7 +50,7 @@ class HTTPRequest extends ApplicationComponent
                 throw new \UnexpectedValueException('Le formulaire édité à un token non valide.');
             }
             return isset($_POST[$key]) ? htmlspecialchars($_POST[$key]) : null;
-        }    
+        }
     }
 
     public function postExists($key)

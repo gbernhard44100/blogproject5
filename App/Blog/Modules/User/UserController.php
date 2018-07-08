@@ -46,7 +46,7 @@ class UserController extends Controller
                         $this->page->addVar('redflash', 'Connection impossible : Le mot de passe est incorrect.');
                         $this->page->addVar('form', $form);
                         $this->setView('ShowLoginPage');
-                    }    
+                    }
                 } else {
                     $form->resetToken();
                     $this->page->addVar('redflash', 'Connection impossible : Votre inscription n\'a pas encore été validé par l\'administrateur');

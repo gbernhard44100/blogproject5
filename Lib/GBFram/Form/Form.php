@@ -18,14 +18,14 @@ abstract Class Form
     {
         $this->setName($name);
         $this->setEntity($entity);
-        $this->setTargetUrl($target);    
-        
-        if ($request->method() == 'POST') {  
+        $this->setTargetUrl($target);
+
+        if ($request->method() == 'POST') {
             $this->hydrateFromPostRequest($request);
-        } 
-        
-        static::setFields(); 
-        
+        }
+
+        static::setFields();
+
         if ($this->isValid() === FALSE || $request->method() != 'POST') {
             $this->resetToken();
         }
@@ -55,7 +55,7 @@ abstract Class Form
     {
         return $this->entity;
     }
-    
+
     public function token()
     {
         return $this->token;
@@ -85,7 +85,7 @@ abstract Class Form
     {
         $this->entity = $entity;
     }
-    
+
     public function setToken($token)
     {
         $this->token = $token;
@@ -116,7 +116,7 @@ abstract Class Form
             }
         }
     }
-    
+
     public function resetToken()
     {
         $this->token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
