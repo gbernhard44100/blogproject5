@@ -5,7 +5,7 @@ namespace Lib\GBFram\Form;
 class LengthValidator extends Validator
 {
 
-    private $_length;
+    private $length;
 
     public function __construct($errorMessage, $length = null)
     {
@@ -15,8 +15,8 @@ class LengthValidator extends Validator
 
     public function isValid($value)
     {
-        if (isset($this->_length)) {
-            return strlen($value) <= $this->_length && $value != '';
+        if (isset($this->length)) {
+            return strlen($value) <= $this->length && $value != '';
         } else {
             return $value != '';
         }
@@ -24,7 +24,7 @@ class LengthValidator extends Validator
 
     public function setLength($length)
     {
-        $this->_length = $length;
+        $this->length = $length;
     }
 
 }
