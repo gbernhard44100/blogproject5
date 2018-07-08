@@ -5,7 +5,7 @@ namespace App\Blog\Modules\Home;
 use Lib\GBFram\Controller;
 use \Lib\GBFram\HTTPRequest;
 
-Class HomeController extends Controller
+class HomeController extends Controller
 {
 
     public function executeHomePage()
@@ -24,22 +24,22 @@ Class HomeController extends Controller
         $email = $request->postData('email');
         $comments = $request->postData('comments');
 
-        $ableToSend = TRUE;
+        $ableToSend = true;
 
         if (trim($name) == '') {
-            $ableToSend = FALSE;
+            $ableToSend = false;
             $this->page->addVar('redflash', 'Attention : le formulaire n\'a pas été envoyé! Vous devez entrer votre nom.');
         }
         if (trim($email) == '') {
-            $ableToSend = FALSE;
+            $ableToSend = false;
             $this->page->addVar('redflash', 'Attention : le formulaire n\'a pas été envoyé! Il faut entrer une adresse email valide.');
         }
         if (!$this->isEmail($email)) {
-            $ableToSend = FALSE;
+            $ableToSend = false;
             $this->page->addVar('redflash', 'Attention : le formulaire n\'a pas été envoyé! L\'adresse e-mail que vous avez entrée est incorrecte.');
         }
         if (trim($comments) == '') {
-            $ableToSend = FALSE;
+            $ableToSend = false;
             $this->page->addVar('redflash', 'Attention : le formulaire n\'a pas été envoyé! Vous n\'avez pas écrit de message.');
         }
 

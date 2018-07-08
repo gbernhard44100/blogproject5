@@ -10,7 +10,7 @@ class Router extends ApplicationComponent
 
     const NO_ROUTE = 1;
 
-    function __construct(Application $app)
+    public function __construct(Application $app)
     {
         parent::__construct($app);
 

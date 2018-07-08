@@ -27,7 +27,7 @@ class BlogPostController extends Controller
         $commentManager = $this->rm->getManagerOf('Comment');
         $comments = $commentManager->getList(['idBlog' => $request->getData('id')]);
         $this->page->addVar('comments', $comments);
-        $form = new CommentForm(new Comment(), '/blogpost/' . $request->getData('id') . '/submitcomment');
+        $form = new CommentForm(new Comment(), '/blogpost/' . $request->getData('id') . '/submitcomment', $request);
         $this->page->addVar('commentForm', $form);
     }
 
@@ -69,7 +69,7 @@ class BlogPostController extends Controller
         $this->testAuthentication($request);
         $manager = $this->rm->getManagerOf('BlogPost');
         $blogpost = $manager->getUnique($request->getData('id'));
-        $form = new BlogPostForm($blogpost, '/admin/blogpost/' . $request->getData('id') . '/submitmodifications');
+        $form = new BlogPostForm($blogpost, '/admin/blogpost/' . $request->getData('id') . '/submitmodifications', $request);
         $this->page->addVar('form', $form);
     }
 
@@ -138,7 +138,7 @@ class BlogPostController extends Controller
         $this->testAuthentication($request);
         $manager = $this->rm->getManagerOf('Comment');
         $comment = $manager->getUnique($request->getData('comment_id'));
-        $comment->setValid(TRUE);
+        $comment->setValid(true);
         $manager->upDate($comment);
         $this->app()->HttpResponse()->redirect('/admin/blogpost/' . $request->getData('id') . '/commentaires');
     }
@@ -148,8 +148,7 @@ class BlogPostController extends Controller
         /* On vérifie d'abord la validité du ticket */
         if (isset($_COOKIE['tc']) && isset($_SESSION['ticket'])) {
             if (isset($_SESSION['auth']) && $_COOKIE['tc'] == $_SESSION['ticket']) {
-                $ticket = session_id() . microtime() . rand(0, 99999);
-                $ticket = hash('sha512', $ticket);
+                $ticket = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
                 setcookie('tc', '', time() - 3600, '/', 'www.bernharddesign.com', false, true);
                 setcookie('tc', $ticket, time() + (60 * 20), '/', 'www.bernharddesign.com', false, true);
                 $_SESSION['ticket'] = $ticket;

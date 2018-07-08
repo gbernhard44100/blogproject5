@@ -10,7 +10,7 @@ class User extends Entity
     protected $id;
     protected $username;
     protected $password;
-    protected $valid = FALSE;
+    protected $valid = false;
 
     public function __construct()
     {
@@ -39,7 +39,7 @@ class User extends Entity
 
     public function setValid()
     {
-        $this->valid = TRUE;
+        $this->valid = true;
     }
 
     public function setId($id)

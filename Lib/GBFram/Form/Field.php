@@ -7,9 +7,9 @@ use Lib\GBFram\Hydrator;
 abstract class Field
 {
 
-    Protected $label;
-    Protected $name;
-    Protected $value;
+    protected $label;
+    protected $name;
+    protected $value;
     protected $validators = [];
     protected $fieldType;
     protected $errorMessage;

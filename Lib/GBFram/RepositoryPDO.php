@@ -7,7 +7,7 @@ class RepositoryPDO extends Repository
 
     protected $table = '';
 
-    function __construct(Application $app)
+    public function __construct(Application $app)
     {
         parent::__construct($app, PDOFactory::getMysqlConnexion($app->name()));
     }
@@ -49,7 +49,7 @@ class RepositoryPDO extends Repository
     /**
      * Return from a database all the entities in a range defined by the input parameters
      */
-    public function getList(array $keys = [], int $offset = -1, int $limit = -1, string $sortingAttribut = 'id', bool $side = FALSE)
+    public function getList(array $keys = [], int $offset = -1, int $limit = -1, string $sortingAttribut = 'id', bool $side = false)
     {
         $finalQuery = 'SELECT * From ' . $this->table;
 
@@ -76,11 +76,7 @@ class RepositoryPDO extends Repository
         }
         $request = $this->dao->prepare($finalQuery);
 
-        try {
-            $request->execute($values);
-        } catch (\Exception $ex) {
-            echo $ex->getMessage();
-        }
+        $request->execute($values);
 
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'App\\' . $this->app()->name() . '\Entity\\' . ucfirst($this->table));
         $entities = $request->fetchAll();

@@ -5,7 +5,7 @@ namespace Lib\GBFram\Form;
 class EmailValidator extends Validator
 {
 
-    function __construct($errorMessage)
+    public function __construct($errorMessage)
     {
         parent::__construct($errorMessage);
     }

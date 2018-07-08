@@ -2,11 +2,6 @@
 
 namespace App\Blog\Models;
 
-/**
- * Description of BlogPostForm
- *
- * @author CathyGaetanB
- */
 use App\Blog\Entity\Comment;
 use Lib\GBFram\Form\Form;
 use \Lib\GBFram\Form\LengthValidator;
@@ -19,10 +14,9 @@ class CommentForm extends Form
     public function __construct(Comment $comment, string $target, $request = null)
     {
         parent::__construct('Comment', $comment, $target, $request);
-        $this->setfields();
     }
 
-    public function setfields()
+    public function setFields()
     {
         $this->addField(new Input(array('label' => 'Auteur', 'name' => 'author', 'value' => $this->entity()->author(),
             'validators' => array(new LengthValidator('Le nom de l\'auteur est trop long ou non rempli', 255))

@@ -4,7 +4,7 @@ namespace Lib\GBFram\Form;
 
 use Lib\GBFram\HTTPRequest;
 
-Class Form
+abstract class Form
 {
 
     private $name;
@@ -12,14 +12,22 @@ Class Form
     private $targetUrl;
     private $method = 'post';
     private $fields = array();
+    private $token;
 
     public function __construct($name, $entity, $target, HTTPRequest $request = null)
     {
         $this->setName($name);
         $this->setEntity($entity);
         $this->setTargetUrl($target);
-        if (!is_null($request)) {
+
+        if ($request->method() == 'POST') {
             $this->hydrateFromPostRequest($request);
+        }
+
+        static::setFields();
+
+        if ($this->isValid() === false || $request->method() != 'POST') {
+            $this->resetToken();
         }
     }
 
@@ -48,6 +56,11 @@ Class Form
         return $this->entity;
     }
 
+    public function token()
+    {
+        return $this->token;
+    }
+
     public function addField(Field $field)
     {
         $this->fields[] = $field;
@@ -71,6 +84,11 @@ Class Form
     public function setEntity($entity)
     {
         $this->entity = $entity;
+    }
+
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 
     public function isValid()
@@ -97,6 +115,12 @@ Class Form
                 $this->entity->$method($request->postData($attribut->getName()));
             }
         }
+    }
+
+    public function resetToken()
+    {
+        $this->token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+        $_SESSION['postToken'] = $this->token;
     }
 
 }

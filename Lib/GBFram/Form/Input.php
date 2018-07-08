@@ -7,7 +7,7 @@ class Input extends Field
 
     private $type = 'text';
 
-    function __construct(array $data)
+    public function __construct(array $data)
     {
         parent::__construct($data);
         $this->fieldType = 'Input';

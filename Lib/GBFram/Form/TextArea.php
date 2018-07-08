@@ -5,10 +5,10 @@ namespace Lib\GBFram\Form;
 class TextArea extends Field
 {
 
-    Private $rows = "10";
-    Private $cols = "80";
+    private $rows = "10";
+    private $cols = "80";
 
-    function __construct(array $data)
+    public function __construct(array $data)
     {
         parent::__construct($data);
         $this->fieldType = 'TextArea';
