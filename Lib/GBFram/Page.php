@@ -13,7 +13,7 @@ class Page extends ApplicationComponent
     protected $twig;
     protected $twigTemplatesPath = array();
 
-    function __construct(Application $app)
+    public function __construct(Application $app)
     {
         parent::__construct($app);
 
@@ -26,7 +26,7 @@ class Page extends ApplicationComponent
         }
         $templatesloader = new FilesystemLoader($this->twigTemplatesPath);
         $this->twig = new Environment($templatesloader, array(
-            'cache' => FALSE,
+            'cache' => false,
             'debug' => true,
         ));
         $this->twig->addExtension(new \Twig_Extensions_Extension_Text);
@@ -45,10 +45,10 @@ class Page extends ApplicationComponent
 
     public function getGeneratedPage()
     {
-        $fileExist = False;
+        $fileExist = false;
         foreach ($this->twigTemplatesPath as $path) {
             if (file_exists($path . '/' . $this->contentFile)) {
-                $fileExist = TRUE;
+                $fileExist = true;
             }
         }
         if (!isset($fileExist)) {

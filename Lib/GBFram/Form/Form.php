@@ -4,7 +4,7 @@ namespace Lib\GBFram\Form;
 
 use Lib\GBFram\HTTPRequest;
 
-abstract Class Form
+abstract class Form
 {
 
     private $name;
@@ -26,7 +26,7 @@ abstract Class Form
 
         static::setFields();
 
-        if ($this->isValid() === FALSE || $request->method() != 'POST') {
+        if ($this->isValid() === false || $request->method() != 'POST') {
             $this->resetToken();
         }
     }

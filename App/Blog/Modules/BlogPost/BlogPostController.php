@@ -138,7 +138,7 @@ class BlogPostController extends Controller
         $this->testAuthentication($request);
         $manager = $this->rm->getManagerOf('Comment');
         $comment = $manager->getUnique($request->getData('comment_id'));
-        $comment->setValid(TRUE);
+        $comment->setValid(true);
         $manager->upDate($comment);
         $this->app()->HttpResponse()->redirect('/admin/blogpost/' . $request->getData('id') . '/commentaires');
     }

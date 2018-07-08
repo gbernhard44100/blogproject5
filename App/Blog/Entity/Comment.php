@@ -9,7 +9,7 @@ class Comment extends Entity
 
     protected $id;
     protected $author;
-    protected $valid = FALSE;
+    protected $valid = false;
     protected $content;
     protected $updateDate;
     protected $idBlog;
@@ -58,7 +58,7 @@ class Comment extends Entity
 
     public function setValid()
     {
-        $this->valid = TRUE;
+        $this->valid = true;
     }
 
     public function setAuthor(string $author)

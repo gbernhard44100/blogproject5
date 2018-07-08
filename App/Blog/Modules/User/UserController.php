@@ -29,13 +29,13 @@ class UserController extends Controller
             $matchedUser = $manager->getList([
                 'username' => $request->postData('username'),]);
             if (!empty($matchedUser)) {
-                if ($matchedUser[0]->valid() == TRUE) {
+                if ($matchedUser[0]->valid() == true) {
                     if (password_verify($user->password(), $matchedUser[0]->password())) {
                         $ticket = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
                         setcookie('tc', '', time() - 3600, '/', 'www.bernharddesign.com', false, true);
                         setcookie('tc', $ticket, time() + (60 * 20), '/', 'www.bernharddesign.com', false, true);
                         $_SESSION['ticket'] = $ticket;
-                        $_SESSION['auth'] = TRUE;
+                        $_SESSION['auth'] = true;
                         if ($request->getData('adresse') == '') {
                             $this->app()->httpResponse()->redirect('/admin');
                         } else {
