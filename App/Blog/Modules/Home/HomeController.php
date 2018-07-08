@@ -51,13 +51,13 @@ class HomeController extends Controller
 
             $address = "gaetan.bernhard@gmail.com";
 
-            $e_subject = 'Vous avez été contacté par ' . $name . '.';
+            $eSubject = 'Vous avez été contacté par ' . $name . '.';
             $subject = "Mon blog professionnel";
-            $e_body = "Vous avez été contacté par $name concernant : $subject, et son message est ci-dessous." . PHP_EOL . PHP_EOL;
-            $e_content = "\"$comments\"" . PHP_EOL . PHP_EOL;
-            $e_reply = "Vous pouvez contacter $name par cet email, $email";
+            $eBody = "Vous avez été contacté par $name concernant : $subject, et son message est ci-dessous." . PHP_EOL . PHP_EOL;
+            $eContent = "\"$comments\"" . PHP_EOL . PHP_EOL;
+            $eReply = "Vous pouvez contacter $name par cet email, $email";
 
-            $msg = wordwrap($e_body . $e_content . $e_reply, 70);
+            $msg = wordwrap($eBody . $eContent . $eReply, 70);
 
             $headers = "From: $email" . PHP_EOL;
             $headers .= "Reply-To: $email" . PHP_EOL;
@@ -65,7 +65,7 @@ class HomeController extends Controller
             $headers .= "Content-type: text/plain; charset=utf-8" . PHP_EOL;
             $headers .= "Content-Transfer-Encoding: quoted-printable" . PHP_EOL;
 
-            if (mail($address, $e_subject, $msg, $headers)) {
+            if (mail($address, $eSubject, $msg, $headers)) {
                 $this->page->addVar('greenflash', 'J\'ai avons bien reçu votre message, ' . $name . '. Merci de m\'avoir contacter!');
             } else {
                 echo 'ERROR!';
