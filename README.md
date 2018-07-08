@@ -26,9 +26,9 @@ Link of the code analysis made by Codacy : [![Codacy Badge](https://api.codacy.c
 4. Go on the App/Blog/Config directory and rename the file **mysqlconnection.xml.dist** by **mysqlconnection.xml**.
 5. Open the renamed file **mysqlconnection.xml** and fill the information like below : 
     * host: *The host of your datatbase*
-    * database_name: *name of your database*
-    * database_user: *username to connect to your database*
-    * database_password: *password to connect to your database*
+    * dbname: *name of your database*
+    * user: *username to connect to your database*
+    * password: *password to connect to your database*
 6. Create the database in MySQL and respect the constrains below :
     * For each repository : create a table in the database and name it with the same name as the attribute "table" of the repository class (Example : 'blogpost' for the class BlogPostRepositoryPDO)
     * The column names and the names of all entity attributes have to be the same.
