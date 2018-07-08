@@ -4,7 +4,7 @@ namespace Lib\GBFram\Form;
 
 use Lib\GBFram\HTTPRequest;
 
-Class Form
+abstract Class Form
 {
 
     private $name;
@@ -18,16 +18,16 @@ Class Form
     {
         $this->setName($name);
         $this->setEntity($entity);
-        $this->setTargetUrl($target);
+        $this->setTargetUrl($target);    
         
-        /** Generating token to protect the user against the CSRF attacks. */
-        if (empty($request->postData('postToken'))) {
-            $this->token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
-            $_SESSION['postToken'] = $this->token;
-        }
-        
-        if (!is_null($request)) {
+        if ($request->method() == 'POST') {  
             $this->hydrateFromPostRequest($request);
+        } 
+        
+        static::setFields(); 
+        
+        if ($this->isValid() === FALSE || $request->method() != 'POST') {
+            $this->resetToken();
         }
     }
 
@@ -115,6 +115,12 @@ Class Form
                 $this->entity->$method($request->postData($attribut->getName()));
             }
         }
+    }
+    
+    public function resetToken()
+    {
+        $this->token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+        $_SESSION['postToken'] = $this->token;
     }
 
 }

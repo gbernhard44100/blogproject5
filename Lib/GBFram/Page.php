@@ -32,6 +32,7 @@ class Page extends ApplicationComponent
         $this->twig->addExtension(new \Twig_Extensions_Extension_Text);
         $this->twig->addExtension(new \Twig_Extension_Debug());
         $this->twig->addGlobal('session', $_SESSION);
+        $this->twig->addGlobal('server', $_SERVER);
     }
 
     public function addVar($var, $value)

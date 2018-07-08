@@ -7,7 +7,7 @@
                         <div class="col-md-7 col-lg-7">                        
                             <span><label for="{{field.name}}">{{field.label}}</label></span>
                             <Input type="{{field.type}}" class="input-style" id="{{field.name}}" name="{{field.name}}" value="{{field.value}}">
-                            {%if field.errorMessage%}
+                            {% if field.errorMessage and server.REQUEST_METHOD == 'POST' %}
                                 <div class="invalid-feedback">
                                     <div class="alert alert-danger">
                                         <strong>{{field.errorMessage}}</strong>
@@ -19,7 +19,7 @@
                         <div class="col-md-8 col-lg-8">
                             <label for="{{field.name}}">{{field.label}}</label>
                             <textarea id="{{field.name}}" class="input-style" name="{{field.name}}" rows="{{field.rows}}" cols="{{field.cols}}">{{field.value}}</textarea>
-                            {%if field.errorMessage%}
+                            {%if field.errorMessage and server.REQUEST_METHOD == 'POST' %}
                                 <div class="invalid-feedback">
                                     <div class="alert alert-danger">
                                         <strong>{{field.errorMessage}}</strong>

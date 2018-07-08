@@ -30,30 +30,31 @@ class UserController extends Controller
                 'username' => $request->postData('username'),]);
             if (!empty($matchedUser)) {
                 if ($matchedUser[0]->valid() == TRUE) {
-                    if (!password_verify($user->password(), $matchedUser[0]->password())) {
-                        $this->page->addVar('redflash', 'Le mot de passe est incorrect.');
+                    if (password_verify($user->password(), $matchedUser[0]->password())) {
+                        $ticket = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+                        setcookie('tc', '', time() - 3600, '/', 'www.bernharddesign.com', false, true);
+                        setcookie('tc', $ticket, time() + (60 * 20), '/', 'www.bernharddesign.com', false, true);
+                        $_SESSION['ticket'] = $ticket;
+                        $_SESSION['auth'] = TRUE;
+                        if ($request->getData('adresse') == '') {
+                            $this->app()->httpResponse()->redirect('/admin');
+                        } else {
+                            $this->app()->httpResponse()->redirect($request->getData('adresse'));
+                        }
+                    } else {
+                        $form->resetToken();
+                        $this->page->addVar('redflash', 'Connection impossible : Le mot de passe est incorrect.');
                         $this->page->addVar('form', $form);
                         $this->setView('ShowLoginPage');
-                    }
-                    session_start();
-                    $ticket = session_id() . microtime() . rand(0, 99999);
-                    $ticket = hash('sha512', $ticket);
-                    setcookie('tc', '', time() - 3600, '/', 'www.bernharddesign.com', false, true);
-                    setcookie('tc', $ticket, time() + (60 * 20), '/', 'www.bernharddesign.com', false, true);
-                    $_SESSION['ticket'] = $ticket;
-                    $_SESSION['auth'] = TRUE;
-
-                    if ($request->getData('adresse') == '') {
-                        $this->app()->httpResponse()->redirect('/admin');
-                    } else {
-                        $this->app()->httpResponse()->redirect($request->getData('adresse'));
-                    }
+                    }    
                 } else {
+                    $form->resetToken();
                     $this->page->addVar('redflash', 'Connection impossible : Votre inscription n\'a pas encore été validé par l\'administrateur');
                     $this->page->addVar('form', $form);
                     $this->setView('ShowLoginPage');
                 }
             } else {
+                $form->resetToken();
                 $this->page->addVar('redflash', 'Le pseudo est inconnu.');
                 $this->page->addVar('form', $form);
                 $this->setView('ShowLoginPage');

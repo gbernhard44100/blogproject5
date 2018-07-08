@@ -14,10 +14,9 @@ class BlogPostForm extends Form
     public function __construct(BlogPost $blogpost, string $target, $request = null)
     {
         parent::__construct('BlogPost', $blogpost, $target, $request);
-        $this->setfields();
     }
 
-    public function setfields()
+    public function setFields()
     {
         $this->addField(new Input(array('label' => 'Auteur', 'name' => 'author', 'value' => $this->entity()->author(),
             'validators' => [new LengthValidator('Le nom de l\'auteur est trop long ou non rempli', 255)]

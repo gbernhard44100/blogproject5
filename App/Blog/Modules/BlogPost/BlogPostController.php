@@ -148,8 +148,7 @@ class BlogPostController extends Controller
         /* On vérifie d'abord la validité du ticket */
         if (isset($_COOKIE['tc']) && isset($_SESSION['ticket'])) {
             if (isset($_SESSION['auth']) && $_COOKIE['tc'] == $_SESSION['ticket']) {
-                $ticket = session_id() . microtime() . rand(0, 99999);
-                $ticket = hash('sha512', $ticket);
+                $ticket = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
                 setcookie('tc', '', time() - 3600, '/', 'www.bernharddesign.com', false, true);
                 setcookie('tc', $ticket, time() + (60 * 20), '/', 'www.bernharddesign.com', false, true);
                 $_SESSION['ticket'] = $ticket;
