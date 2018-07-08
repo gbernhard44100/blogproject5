@@ -24,7 +24,17 @@ class SubscriptionForm extends Form
         $this->addField(new Input(array('type' => 'password', 'label' => 'Mot de passe', 'name' => 'password', 'value' => $this->entity()->password(),
             'validators' => [new LengthValidator('Le mot de passe n\'est pas rempli', 255)]
         )));
-        $this->addField(new Input(array('type' => 'password', 'label' => 'Confirmer le mot de passe', 'name' => 'confirmPassword', 'value' => '',
+
+        /** Define the value in the field used to confirm the password */
+        $confirmPassword = '';
+        if (isset($_POST['postToken']) && isset($_SESSION['postToken'])) {
+            if ($_POST['postToken'] != $_SESSION['postToken']) {
+                throw new \UnexpectedValueException('Le formulaire édité à un token non valide.');
+            }
+            $confirmPassword = $_POST['confirmPassword'];
+        }
+
+        $this->addField(new Input(array('type' => 'password', 'label' => 'Confirmer le mot de passe', 'name' => 'confirmPassword', 'value' => $confirmPassword,
             'validators' => [new LengthValidator('Le mot de passe à confirmer n\'est pas rempli', 255)]
         )));
     }

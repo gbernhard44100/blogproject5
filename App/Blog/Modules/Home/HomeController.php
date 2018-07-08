@@ -52,7 +52,7 @@ class HomeController extends Controller
             $address = "gaetan.bernhard@gmail.com";
 
             $e_subject = 'Vous avez été contacté par ' . $name . '.';
-
+            $subject = "Mon blog professionnel";
             $e_body = "Vous avez été contacté par $name concernant : $subject, et son message est ci-dessous." . PHP_EOL . PHP_EOL;
             $e_content = "\"$comments\"" . PHP_EOL . PHP_EOL;
             $e_reply = "Vous pouvez contacter $name par cet email, $email";

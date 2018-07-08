@@ -79,15 +79,14 @@ class UserController extends Controller
     public function executeSubmitSubscription(HTTPRequest $request)
     {
         $user = new User();
-
         $form = new SubscriptionForm($user, '/inscription', $request);
-        $form->fields()[2]->setValue($request->postData('confirmPassword'));
         $this->setView('ShowSubscriptionPage');
 
         if (!$form->isValid()) {
             $this->page->addVar('form', $form);
             /* Checking if the password match with the password taped to confirm */
         } elseif (!($request->postData('password') == $request->postData('confirmPassword'))) {
+            $form->resetToken();
             $this->page->addVar('form', $form);
             $this->page->addVar('redflash', 'Inscription impossible : les mots de passe ne sont pas identiques.');
         } else {
@@ -95,6 +94,7 @@ class UserController extends Controller
             $manager = $this->rm->getManagerOf('User');
             $matchUser = $manager->getList(['username' => $user->username()]);
             if (!empty($matchUser)) {
+                $form->resetToken();
                 $this->page->addVar('form', $form);
                 $this->page->addVar
                         ('redflash', 'Inscription impossible : Nom d\'utilisateur déjà utilisé.');
