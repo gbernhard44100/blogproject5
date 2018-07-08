@@ -45,7 +45,12 @@ class HTTPRequest extends ApplicationComponent
 
     public function postData($key)
     {
-        return isset($_POST[$key]) ? htmlspecialchars($_POST[$key]) : null;
+        if (isset($_POST['postToken']) && isset($_SESSION['postToken'])) {
+            if ($_POST['postToken'] != $_SESSION['postToken']) {
+                throw new \UnexpectedValueException('Le formulaire édité à un token non valide.');
+            }
+            return isset($_POST[$key]) ? htmlspecialchars($_POST[$key]) : null;
+        }
     }
 
     public function postExists($key)

@@ -13,10 +13,9 @@ class LoginForm extends Form
     public function __construct(User $user, string $target, $request = null)
     {
         parent::__construct('Login', $user, $target, $request);
-        $this->setfields();
     }
 
-    public function setfields()
+    public function setFields()
     {
         $this->addField(new Input(array('label' => 'Nom d\'utilisateur', 'name' => 'username', 'value' => $this->entity()->username(),
             'validators' => [new LengthValidator('Le nom de d\'utilisateur est trop long ou non rempli', 255)]

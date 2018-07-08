@@ -76,11 +76,7 @@ class RepositoryPDO extends Repository
         }
         $request = $this->dao->prepare($finalQuery);
 
-        try {
-            $request->execute($values);
-        } catch (\Exception $ex) {
-            echo $ex->getMessage();
-        }
+        $request->execute($values);
 
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'App\\' . $this->app()->name() . '\Entity\\' . ucfirst($this->table));
         $entities = $request->fetchAll();
