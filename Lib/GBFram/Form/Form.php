@@ -25,7 +25,7 @@ abstract class Form
         }
 
         static::setFields();
-
+        
         if ($this->isValid() === false || $request->method() != 'POST') {
             $this->resetToken();
         }
