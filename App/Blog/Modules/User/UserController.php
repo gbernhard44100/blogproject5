@@ -25,17 +25,16 @@ class UserController extends Controller
             $this->page->addVar('form', $form);
             $this->setView('ShowLoginPage');
         } else {
-            /* hashage et salage du mot de passe */
-            $long = strlen($user->password());
-            $password = "&=@+" . $long . $user->password() . "#1%";
-            $password = hash('sha512', $password);
-            $user->setPassword($password);
             $manager = $this->rm->getManagerOf('User');
             $matchedUser = $manager->getList([
-                'username' => $request->postData('username'),
-                'password' => $user->password(),]);
+                'username' => $request->postData('username'),]);
             if (!empty($matchedUser)) {
                 if ($matchedUser[0]->valid() == TRUE) {
+                    if (!password_verify($user->password(), $matchedUser[0]->password())) {
+                        $this->page->addVar('redflash', 'Le mot de passe est incorrect.');
+                        $this->page->addVar('form', $form);
+                        $this->setView('ShowLoginPage');
+                    }
                     session_start();
                     $ticket = session_id() . microtime() . rand(0, 99999);
                     $ticket = hash('sha512', $ticket);
@@ -55,7 +54,7 @@ class UserController extends Controller
                     $this->setView('ShowLoginPage');
                 }
             } else {
-                $this->page->addVar('redflash', 'Le pseudo ou le mot de passe est incorrect.');
+                $this->page->addVar('redflash', 'Le pseudo est inconnu.');
                 $this->page->addVar('form', $form);
                 $this->setView('ShowLoginPage');
             }
@@ -70,7 +69,7 @@ class UserController extends Controller
         $this->app()->httpResponse()->redirect('/');
     }
 
-    public function executeShowSubscriptionPage()
+    public function executeShowSubscriptionPage(HTTPRequest $request)
     {
         $form = new SubscriptionForm(new User, '/inscription', $request);
         $this->page->addVar('form', $form);
@@ -100,9 +99,7 @@ class UserController extends Controller
                         ('redflash', 'Inscription impossible : Nom d\'utilisateur déjà utilisé.');
             } else {
                 /* hashage et salage du mot de passe */
-                $long = strlen($user->password());
-                $password = "&=@+" . $long . $user->password() . "#1%";
-                $password = hash('sha512', $password);
+                $password = password_hash($user->password(), PASSWORD_BCRYPT);
                 $user->setPassword($password);
 
                 $manager->add($user);
