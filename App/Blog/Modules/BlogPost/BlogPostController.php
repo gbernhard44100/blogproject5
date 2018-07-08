@@ -27,7 +27,7 @@ class BlogPostController extends Controller
         $commentManager = $this->rm->getManagerOf('Comment');
         $comments = $commentManager->getList(['idBlog' => $request->getData('id')]);
         $this->page->addVar('comments', $comments);
-        $form = new CommentForm(new Comment(), '/blogpost/' . $request->getData('id') . '/submitcomment');
+        $form = new CommentForm(new Comment(), '/blogpost/' . $request->getData('id') . '/submitcomment', $request);
         $this->page->addVar('commentForm', $form);
     }
 
@@ -69,7 +69,7 @@ class BlogPostController extends Controller
         $this->testAuthentication($request);
         $manager = $this->rm->getManagerOf('BlogPost');
         $blogpost = $manager->getUnique($request->getData('id'));
-        $form = new BlogPostForm($blogpost, '/admin/blogpost/' . $request->getData('id') . '/submitmodifications');
+        $form = new BlogPostForm($blogpost, '/admin/blogpost/' . $request->getData('id') . '/submitmodifications', $request);
         $this->page->addVar('form', $form);
     }
 

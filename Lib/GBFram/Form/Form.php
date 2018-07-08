@@ -12,12 +12,20 @@ Class Form
     private $targetUrl;
     private $method = 'post';
     private $fields = array();
+    private $token;
 
     public function __construct($name, $entity, $target, HTTPRequest $request = null)
     {
         $this->setName($name);
         $this->setEntity($entity);
         $this->setTargetUrl($target);
+        
+        /** Generating token to protect the user against the CSRF attacks. */
+        if (empty($request->postData('postToken'))) {
+            $this->token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+            $_SESSION['postToken'] = $this->token;
+        }
+        
         if (!is_null($request)) {
             $this->hydrateFromPostRequest($request);
         }
@@ -47,6 +55,11 @@ Class Form
     {
         return $this->entity;
     }
+    
+    public function token()
+    {
+        return $this->token;
+    }
 
     public function addField(Field $field)
     {
@@ -71,6 +84,11 @@ Class Form
     public function setEntity($entity)
     {
         $this->entity = $entity;
+    }
+    
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 
     public function isValid()

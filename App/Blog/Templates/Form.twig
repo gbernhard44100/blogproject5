@@ -28,8 +28,9 @@
                             {% endif %}
                         </div>
                     {% endif %}
-                {% endfor %}
+                {% endfor %}       
                 <div class="col-md-12">
+                    <input type="hidden" id="postToken" name="postToken" value="{{form.token}}">
                     <input type="submit" class="flat-btn" value="{{submitValue}}"> 
                 </div>
             </div>    

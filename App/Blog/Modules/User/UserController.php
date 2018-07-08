@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function executeShowLoginPage(HTTPRequest $request)
     {
-        $form = new LoginForm(new User, implode('', [explode('demandeconnexion', $request->requestURI())[0], 'seconnecter']));
+        $form = new LoginForm(new User, implode('', [explode('demandeconnexion', $request->requestURI())[0], 'seconnecter']), $request);
         $this->page->addVar('form', $form);
     }
 
@@ -72,7 +72,7 @@ class UserController extends Controller
 
     public function executeShowSubscriptionPage()
     {
-        $form = new SubscriptionForm(new User, '/inscription');
+        $form = new SubscriptionForm(new User, '/inscription', $request);
         $this->page->addVar('form', $form);
     }
 
